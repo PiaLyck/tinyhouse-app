@@ -1,7 +1,4 @@
-$bgcolor : whitesmoke;
-$font-primary : '';
-$font-secondary: '';
-
+@import '../styles.scss';
 div{
   background-color: $bgcolor;
 }
