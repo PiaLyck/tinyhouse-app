@@ -10,14 +10,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 // Move to SharedModule later
 import { FormsModule } from '@angular/forms';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyDD3Xl1mv4AUyI5HLML6pyAPCmLwQCP9NY',
-  authDomain: 'tinyhouse-app.firebaseapp.com',
-  databaseURL: 'https://tinyhouse-app.firebaseio.com',
-  projectId: 'tinyhouse-app',
-  storageBucket: 'tinyhouse-app.appspot.com',
-  messagingSenderId: '182420977432'
-};
+import { environment } from '../environments/environment';
+export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
   declarations: [
@@ -26,10 +20,11 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     CoreModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule.enablePersistence() // Turn on offline support
   ],
   providers: [],
   bootstrap: [AppComponent]

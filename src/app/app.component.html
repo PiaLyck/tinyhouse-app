@@ -1,9 +1,13 @@
 <div>Hello folk who love living without too much stuff.</div>
 <div>Hello folk who love making money on renting out your space.</div>
 
+<input [(ngModel)]="newContent" type="text">
+<button (click)="updateContent()">KLIK</button>
+
 <ul *ngFor="let post of posts | async">
   <li>
-    <strong>{{ post.title }}</strong>
-    <br> {{ post.content }}
+    <strong>{{ post.title}}</strong>
+    <strong>{{ post.content }}
+    </strong>
   </li>
 </ul>
