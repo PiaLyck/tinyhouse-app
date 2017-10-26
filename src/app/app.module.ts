@@ -11,6 +11,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
+import { AuthModule } from './auth/auth.module';
 export const firebaseConfig = environment.firebaseConfig;
 
 @NgModule({
@@ -24,7 +25,8 @@ export const firebaseConfig = environment.firebaseConfig;
     CoreModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule.enablePersistence() // Turn on offline support
+    AngularFirestoreModule.enablePersistence(),
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
