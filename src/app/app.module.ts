@@ -13,6 +13,7 @@ export const firebaseConfig = environment.firebaseConfig;
 // Move to SharedModule later
 import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { SharedModule } from './shared/shared.module';
 
 const appRoutes: Routes = [
 
@@ -39,15 +40,13 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     FormsModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
     AuthModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    )
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
