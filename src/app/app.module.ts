@@ -2,17 +2,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-// Move to SharedModule later
-import { FormsModule } from '@angular/forms';
-
+import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
+
 export const firebaseConfig = environment.firebaseConfig;
+// Move to SharedModule later
+import { FormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
+
+const appRoutes: Routes = [
+
+  {
+    path: 'auth',
+    component: AuthComponent,
+    data: { title: 'Auth data sendt frem i router' }
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent,
+  },
+  { path: '',
+    redirectTo: '/welcome',
+    pathMatch: 'full'
+  },
+];
+
 
 @NgModule({
   declarations: [
@@ -23,10 +41,13 @@ export const firebaseConfig = environment.firebaseConfig;
     BrowserModule,
     FormsModule,
     CoreModule,
-    AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
-    AuthModule
+    AuthModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
