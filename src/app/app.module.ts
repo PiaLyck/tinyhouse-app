@@ -11,7 +11,6 @@ import { AuthModule } from './auth/auth.module';
 
 export const firebaseConfig = environment.firebaseConfig;
 // Move to SharedModule later
-import { FormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -41,7 +40,6 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     SharedModule,
-    FormsModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),

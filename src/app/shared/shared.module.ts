@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SharedComponent } from './shared.component';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 /* SharedModule should have anything but services,
 and be imported in all modules that need the shared stuff (which could also be the AppModule)
@@ -24,7 +25,16 @@ both those loaded when the app starts and those you lazy load later.
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    HttpModule,
+    RouterModule
   ],
-  declarations: [SharedComponent]
+  declarations: [],
+  exports: [
+    CommonModule,
+    FormsModule,
+    HttpModule,
+    RouterModule
+  ]
 })
-export class SharedModule {}
+export class SharedModule { }
