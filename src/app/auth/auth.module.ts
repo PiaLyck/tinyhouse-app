@@ -9,6 +9,7 @@ import '../shared/forms.ts';
     CommonModule,
     SharedModule
   ],
-  declarations: [AuthComponent]
+  declarations: [AuthComponent],
+  exports: [AuthComponent]
 })
 export class AuthModule { }

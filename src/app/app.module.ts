@@ -8,43 +8,32 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { RouterModule, Routes } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
-
+import { AppRoutingModule } from './app-routing.module';
 export const firebaseConfig = environment.firebaseConfig;
-// Move to SharedModule later
-import { AuthComponent } from './auth/auth.component';
+
+// Routing
 import { SharedModule } from './shared/shared.module';
-
-const appRoutes: Routes = [
-
-  {
-    path: 'auth',
-    component: AuthComponent,
-    data: { title: 'Auth data sendt frem i router' }
-  },
-  {
-    path: 'welcome',
-    component: WelcomeComponent,
-  },
-  { path: '',
-    redirectTo: '/welcome',
-    pathMatch: 'full'
-  },
-];
-
+import { PageNotFoundComponent } from './not-found.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListingDetailComponent } from './listing/listing-detail/listing-detail.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    WelcomeComponent
-  ],
   imports: [
     BrowserModule,
     SharedModule,
+    AppRoutingModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
-    AuthModule,
-    RouterModule.forRoot(appRoutes)
+    AuthModule
+  ],
+  declarations: [
+    AppComponent,
+    WelcomeComponent,
+    PageNotFoundComponent,
+    DashboardComponent,
+    ListingDetailComponent
+
   ],
   providers: [],
   exports: [AppComponent],

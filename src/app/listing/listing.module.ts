@@ -6,6 +6,7 @@ import { ListingDetailComponent } from './listing-detail/listing-detail.componen
   imports: [
     CommonModule
   ],
-  declarations: [ListingDetailComponent]
+  declarations: [ListingDetailComponent],
+  exports: [ListingDetailComponent]
 })
 export class ListingModule { }
