@@ -15,12 +15,13 @@ export const firebaseConfig = environment.firebaseConfig;
 import { SharedModule } from './shared/shared.module';
 import { PageNotFoundComponent } from './not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ListingDetailComponent } from './listing/listing-detail/listing-detail.component';
+import { ListingRoutingModule } from './listing/listing-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
+    ListingRoutingModule,
     AppRoutingModule,
     CoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
@@ -31,9 +32,7 @@ import { ListingDetailComponent } from './listing/listing-detail/listing-detail.
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    DashboardComponent,
-    ListingDetailComponent
-
+    DashboardComponent
   ],
   providers: [],
   exports: [AppComponent],
