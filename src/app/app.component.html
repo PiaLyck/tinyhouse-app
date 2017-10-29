@@ -15,11 +15,12 @@
 <nav>
   <ul>
     <li>
-      <a alt="Welcome" routerLink="/welcome">Welcome</a>
-      <a alt="Login" routerLink="/auth">Login</a>
-      <a alt="Dashboard" routerLink="/dashboard">Dashboard</a>
-      <a alt="Listing" routerLink="/listing-detail">Listings (Detail)</a>
-      <a alt="NotFound" routerLink="/asjkd">Not found</a>
+      <a alt="Welcome" [routerLink]="['/welcome']">Welcome</a>
+      <a alt="Login" [routerLink]="['/login']">Login</a>
+      <a alt="Dashboard" [routerLink]="['/dashboard']">Dashboard</a>
+      <a alt="Listing" [routerLink]="['/listing']">Listings</a>
+      <a alt="ListingDetails" [routerLink]="['listing', 14]">Listings (Details)</a>
+      <a alt="NotFound" [routerLink]="['/asasf']">Not found</a>
     </li>
   </ul>
 </nav>

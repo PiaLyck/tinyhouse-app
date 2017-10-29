@@ -15,15 +15,15 @@ export const firebaseConfig = environment.firebaseConfig;
 import { SharedModule } from './shared/shared.module';
 import { PageNotFoundComponent } from './not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ListingRoutingModule } from './listing/listing-routing.module';
+import { ListingModule } from './listing/listing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
-    ListingRoutingModule,
-    AppRoutingModule,
     CoreModule,
+    ListingModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
     AuthModule

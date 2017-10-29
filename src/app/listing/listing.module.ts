@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListingRoutingModule } from './listing-routing.module';
 
+import { ListingRoutingModule } from './listing-routing.module';
 import { ListingDetailComponent } from './listing-detail/listing-detail.component';
 import { ListingListComponent } from './listing-list/listing-list.component';
 
@@ -12,9 +12,8 @@ import { ListingListComponent } from './listing-list/listing-list.component';
   ],
   declarations: [
     ListingDetailComponent,
-    ListingListComponent],
-  exports: [
-    ListingDetailComponent,
-    ListingListComponent]
+    ListingListComponent
+  ],
+  exports: []
 })
 export class ListingModule { }
