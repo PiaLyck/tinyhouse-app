@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 export const firebaseConfig = environment.firebaseConfig;
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Routing
 import { SharedModule } from './shared/shared.module';
@@ -24,6 +25,7 @@ import { ListingModule } from './listing/listing.module';
     CoreModule,
     ListingModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
     AuthModule
