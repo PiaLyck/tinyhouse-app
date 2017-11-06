@@ -35,7 +35,6 @@ import { ListingModule } from './listing/listing.module';
     DashboardComponent
   ],
   providers: [],
-  exports: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

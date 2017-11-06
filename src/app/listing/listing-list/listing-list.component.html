@@ -1,3 +1,9 @@
-<p>
-  listing-list works!
-</p>
+<div>
+  <h1>{{ title }}</h1>
+  <h3>Vi har {{ noOfListings }} grunde til leje</h3>
+  <ul>
+    <li *ngFor='let listing of listings' (click)="selectListing(listing)">
+      {{listing}}
+    </li>
+  </ul>
+</div>
