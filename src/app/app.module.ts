@@ -3,13 +3,18 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AngularFireModule } from 'angularfire2';
+
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { RouterModule, Routes } from '@angular/router';
+
+// Authentication AngularFire2 and Firebase
 import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
-export const firebaseConfig = environment.firebaseConfig;
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Routing
@@ -26,8 +31,9 @@ import { ListingModule } from './listing/listing.module';
     ListingModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule.enablePersistence(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features,
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AuthModule
   ],
   declarations: [
