@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { AuthService } from './auth.service';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 /* CoreModule should have only services and be imported only once in the AppModule.
 
 * Create a CoreModule with providers for the singleton services you load when the application starts.
@@ -11,8 +15,11 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
-  declarations: []
+  declarations: [],
+  providers: [AuthService]
 })
 export class CoreModule { }

@@ -1,4 +1,29 @@
-<ul>
+<div *ngIf="auth.user | async; then authenticated else guest">
+  <!-- Template will replace this div -->
+</div>
+
+<!-- User not logged in -->
+<ng-template #guest>
+  <h3>Hej gæst</h3>
+  <p>Login, tak</p>
+  <button (click)="auth.googleLogin()">Login with Google</button>
+
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user | async as user">
+    <h3>Hej, {{ user.displayName }}</h3>
+    <img [src]="user.photoURL" />
+    <p>UID: {{ user.uid }}</p>
+    <p>FavouriteColor: {{ user.favouriteColor}}</p>
+  </div>
+</ng-template>
+
+
+
+
+<!-- <ul>
   <li class="text" *ngFor="let post of posts | async">
     {{post.content}}
     {{post.title}}
@@ -6,9 +31,14 @@
 </ul>
 <div *ngIf="afAuth.authState | async; let user; else showLogin">
   <h1>Hello {{ user.displayName }}!</h1>
+  <h1>ID:{{ user.uid }}!</h1>
+  <h3>Email: {{ user.email}}</h3>
+  <img src="{{ user.photoURL}}" alt="" />
+  <button (click)="sendEmailVerification">Send Email Verification</button>
   <button (click)="logout()">Logout</button>
 </div>
 <ng-template #showLogin>
   <p>Please login.</p>
   <button (click)="login()">Login with Google</button>
 </ng-template>
+ -->

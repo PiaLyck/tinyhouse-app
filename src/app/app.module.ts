@@ -4,36 +4,31 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { RouterModule, Routes } from '@angular/router';
 
 // Authentication AngularFire2 and Firebase
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-
-import { AuthModule } from './auth/auth.module';
-import { AppRoutingModule } from './app-routing.module';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Routing
+import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { PageNotFoundComponent } from './not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListingModule } from './listing/listing.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './core/auth.guard';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
-    CoreModule,
-    ListingModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features,
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    CoreModule,
+    AppRoutingModule,
+    ListingModule,
+    BrowserAnimationsModule,
     AuthModule
   ],
   declarations: [
@@ -42,7 +37,7 @@ import { ListingModule } from './listing/listing.module';
     PageNotFoundComponent,
     DashboardComponent
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
