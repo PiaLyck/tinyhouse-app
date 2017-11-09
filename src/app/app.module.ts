@@ -17,8 +17,9 @@ import { SharedModule } from './shared/shared.module';
 import { PageNotFoundComponent } from './not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListingModule } from './listing/listing.module';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './core/auth.module';
 import { AuthGuard } from './core/auth.guard';
+import { ProfileComponent } from './user/profile.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { AuthGuard } from './core/auth.guard';
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

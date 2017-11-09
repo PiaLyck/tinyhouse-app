@@ -2,20 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PageNotFoundComponent } from './not-found.component';
-import { AuthComponent } from './auth/auth.component';
+import { AuthComponent } from './core/auth.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './core/auth.guard';
 import { ListingListComponent } from './listing/listing-list/listing-list.component';
 import { ListingDetailComponent } from './listing/listing-detail/listing-detail.component';
+import { ProfileComponent } from './user/profile.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'listing',  component: ListingListComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'listing', component: ListingListComponent, canActivate: [AuthGuard] },
   { path: 'listing/:id', component: ListingDetailComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '',   redirectTo: '/welcome', pathMatch: 'full' },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -30,4 +32,4 @@ const appRoutes: Routes = [
     RouterModule
   ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
