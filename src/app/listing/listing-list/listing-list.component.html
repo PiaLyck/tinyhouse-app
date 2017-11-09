@@ -1,4 +1,21 @@
-<div>
+<div *ngIf='listings?.length > 0; else noListings'>
+  <ul *ngFor='let listing of listings'>
+    <li>Title: {{ listing.title }}</li>
+    <li>Description: {{ listing.description }}</li>
+    <li>Postcode: {{ listing.postcode }}</li>
+    <li>Monthly Rent: {{ listing.monthlyRent }}</li>
+    <li><img [src]="listing.image" alt=""></li>
+  </ul>
+</div>
+
+
+
+<ng-template #noItems>
+  <hr>
+  <h3>No items</h3>
+</ng-template>
+
+<!-- <div>
   <h1>{{ title }}</h1>
   <h3>Vi har {{ noOfListings }} grunde til leje</h3>
   <ul>
@@ -7,3 +24,4 @@
     </li>
   </ul>
 </div>
+ -->

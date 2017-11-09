@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Listing } from './listing';
+import { Observable } from 'rxjs/Observable';
 
-// Listing default values
-export class Listing {
-  title = 'Your title';
-  content = 'Listing content';
-  monthlyRent = 2000;
-  image = 'http://via.placeholder.com/350x150';
-}
+// Following along this guy: https://www.youtube.com/watch?v=gUmItHaVL2w
 
 @Injectable()
 export class ListingService {
+  listingsCollection: AngularFirestoreCollection<Listing>;
+  listings: Observable<Listing[]>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(public afs: AngularFirestore) {
     // Create new listing, then return as an object
 
-
+    this.listings = this.afs.collection('listings').valueChanges();
   }
 
+  getListings() {
+    // Being called from component
+    return this.listings;
+  }
 }
+
+
