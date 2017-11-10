@@ -1,9 +1,10 @@
 # My first Angular + Firebase adventure: A matchmaking site for tiny house dwellers and landowners looking to rent out an area.
 
 ## Layout
-### Angular Flex-Layout and Angular Material
-[Angular Flex-Layout](https://github.com/angular/flex-layout) provides HTML UI layout for Angular applications; using Flexbox and a Responsive API.
-See [this StackBlitz](https://stackblitz.com/edit/angular-material-flex-layout-seed?file=app%2Fapp.module.ts) on how Angular Flex-Layout plays nicely with [Angular Material](https://material.angular.io/)
+### Materialize
+
+~~[Angular Flex-Layout](https://github.com/angular/flex-layout) provides HTML UI layout for Angular applications; using Flexbox and a Responsive API.
+See [this StackBlitz](https://stackblitz.com/edit/angular-material-flex-layout-seed?file=app%2Fapp.module.ts) on how Angular Flex-Layout plays nicely with [Angular Material](https://material.angular.io/)~~
 
 ---
 
