@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { MaterialComponentsModule } from './/material-components.module';
+import { MaterialComponentsModule } from './material-components.module';
 
 /* SharedModule should have anything but services,
 and be imported in all modules that need the shared stuff (which could also be the AppModule)

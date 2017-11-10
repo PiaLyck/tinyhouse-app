@@ -6,6 +6,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
+// HammerJS - Gesture support
+import 'hammerjs';
+
 // Authentication AngularFire2 and Firebase
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
