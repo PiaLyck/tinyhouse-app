@@ -1,11 +1,19 @@
 <div *ngIf='listings?.length > 0; else noListings'>
   <ul *ngFor='let listing of listings'>
+    <li>Id: {{ listing.id }}</li>
     <li>Title: {{ listing.title }}</li>
     <li>Description: {{ listing.description }}</li>
     <li>Postcode: {{ listing.postcode }}</li>
     <li>Monthly Rent: {{ listing.monthlyRent }}</li>
     <li><img [src]="listing.image" alt=""></li>
   </ul>
+</div>
+
+<div class="flexDemoContainer">
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+    <div fxFlex class="red" fxHide.gt-md> I'm above on mobile, and left on larger devices. </div>
+    <div fxFlex class="blue"> I'm below on mobile, and right on larger devices. </div>
+  </div>
 </div>
 
 

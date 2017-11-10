@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ListingService } from '../listing.service';
 import { Listing } from '../listing';
 
+
 @Component({
   selector: 'app-listing-list',
   templateUrl: './listing-list.component.html',
@@ -14,7 +15,7 @@ export class ListingListComponent implements OnInit {
 
     listings: Listing[];
 
-  // Used for injecting things like services
+  // Constructors is used for injecting things like services
   constructor(private listingService: ListingService) {
   }
 

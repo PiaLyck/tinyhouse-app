@@ -7,11 +7,13 @@ import { ListingListComponent } from './listing-list/listing-list.component';
 import { AuthGuard } from '../core/auth.guard';
 import { ListingService } from './listing.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
     CommonModule,
-    ListingRoutingModule
+    ListingRoutingModule,
+    FlexLayoutModule
   ],
   declarations: [
     ListingDetailComponent,
