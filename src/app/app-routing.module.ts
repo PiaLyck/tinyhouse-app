@@ -9,6 +9,7 @@ import { AuthGuard } from './core/auth.guard';
 import { ListingListComponent } from './listing/listing-list/listing-list.component';
 import { ListingDetailComponent } from './listing/listing-detail/listing-detail.component';
 import { ProfileComponent } from './user/profile.component';
+import { AddListingComponent } from './listing/add-listing/add-listing.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: AuthComponent },
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'listing', component: ListingListComponent, canActivate: [AuthGuard] },
   { path: 'listing/:id', component: ListingDetailComponent, canActivate: [AuthGuard] },
+  { path: 'add-listing', component: AddListingComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

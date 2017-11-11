@@ -23,6 +23,7 @@ import { ListingModule } from './listing/listing.module';
 import { AuthModule } from './core/auth.module';
 import { AuthGuard } from './core/auth.guard';
 import { ProfileComponent } from './user/profile.component';
+import { AddListingComponent } from './listing/add-listing/add-listing.component';
 
 @NgModule({
   imports: [

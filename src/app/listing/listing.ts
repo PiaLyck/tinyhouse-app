@@ -5,5 +5,5 @@ export class Listing {
   monthlyRent?: number;
   image?: string;
   postcode?: number;
-  timestamp?: Date;
+  timestamp?: string;
 }
