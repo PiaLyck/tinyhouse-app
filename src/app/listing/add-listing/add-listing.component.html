@@ -1,12 +1,12 @@
-<form (ngSubmit)="onSubmit()">
-  <mat-form-field>
+<form (ngSubmit)="onSubmit()" class="add-listing-form">
+  <mat-form-field class="">
     <input matInput placeholder="Title">
 <!--     <mat-hint>Errors appear instantly!</mat-hint>
     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
       Please enter a valid email address
     </mat-error> -->
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="">
     <textarea matInput placeholder="Description"></textarea>
   </mat-form-field>
 </form>
