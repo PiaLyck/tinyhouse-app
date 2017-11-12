@@ -25,4 +25,13 @@ export class AddListingComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit() {
+    if (this.listing.title !== '' && this.listing.description !== '') {
+      this.listingService.addListing(this.listing);
+      // and then clear the fields:
+      this.listing.title = '';
+      this.listing.description = '';
+    }
+  }
+
 }

@@ -14,20 +14,26 @@ export class ListingService {
     // Create new listing, then return as an object
     // this.listings = this.afs.collection('listings').valueChanges();
 
+    this.listingsCollection = this.afs.collection('listings');
+
     // In addition to the listing data (eg. title), we get
     // the id by using snapshotChanges and mapping:
-    this.listings = this.afs.collection('listings').snapshotChanges().map(changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as Listing;
-          data.id = a.payload.doc.id;
-          return data;
-        });
+    this.listings = this.listingsCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Listing;
+        data.id = a.payload.doc.id;
+        return data;
       });
+    });
   }
 
   getListings() {
     // Being called from component
     return this.listings;
+  }
+
+  addListing(listing: Listing) {
+    this.listingsCollection.add(listing);
   }
 }
 
