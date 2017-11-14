@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 export class ListingService {
   listingsCollection: AngularFirestoreCollection<Listing>;
   listings: Observable<Listing[]>;
+  listingsDoc: AngularFirestoreDocument<Listing>;
 
   constructor(public afs: AngularFirestore) {
     // Create new listing, then return as an object
@@ -34,6 +35,11 @@ export class ListingService {
 
   addListing(listing: Listing) {
     this.listingsCollection.add(listing);
+  }
+
+  deleteListing(listing: Listing) {
+    this.listingsDoc = this.afs.doc(`listings/${listing.id}`);
+    this.listingsDoc.delete();
   }
 }
 

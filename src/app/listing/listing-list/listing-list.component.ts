@@ -13,7 +13,7 @@ export class ListingListComponent implements OnInit {
     noOfListings = 4;
     listings = ['43kvm i Hillerød', '51kvm i Uggerby', '30kvm i Roskilde']; */
 
-    listings: Listing[];
+  listings: Listing[];
 
   // Constructors is used for injecting things like services
   constructor(private listingService: ListingService) {
@@ -24,6 +24,10 @@ export class ListingListComponent implements OnInit {
     this.listingService.getListings().subscribe(listings => {
       this.listings = listings;
     });
+  }
+
+  deleteListing(event, listing) {
+    this.listingService.deleteListing(listing);
   }
 
 }
