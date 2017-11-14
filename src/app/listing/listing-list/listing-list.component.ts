@@ -14,6 +14,8 @@ export class ListingListComponent implements OnInit {
     listings = ['43kvm i Hillerød', '51kvm i Uggerby', '30kvm i Roskilde']; */
 
   listings: Listing[];
+  editState: Boolean = false;
+  listingToEdit: Listing;
 
   // Constructors is used for injecting things like services
   constructor(private listingService: ListingService) {
@@ -28,6 +30,11 @@ export class ListingListComponent implements OnInit {
 
   deleteListing(event, listing) {
     this.listingService.deleteListing(listing);
+  }
+
+  editListing(event, listing){
+    this.editState = true;
+    this.listingToEdit = listing;
   }
 
 }

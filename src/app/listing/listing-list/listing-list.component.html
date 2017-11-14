@@ -1,5 +1,4 @@
 <div class="listings">
-  <div *ngIf='listings?.length > 0; else noListings'>
     <ul *ngFor='let listing of listings'>
       <li>Id: {{ listing.id }}</li>
       <li>CreatedDate: {{ listing.createdDate }}</li>
@@ -11,13 +10,8 @@
         <img [src]="listing.image" alt="">
       </li>
       <div (click)="deleteListing($event, listing)">DELETE</div>
+      <div (click)="editListing($event, listing)">Edit</div>
     </ul>
-  </div>
-
-  <ng-template #noItems>
-    <hr>
-    <h3>No items</h3>
-  </ng-template>
 </div>
 <!-- <div>
   <h1>{{ title }}</h1>
