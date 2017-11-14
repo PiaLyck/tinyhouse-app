@@ -17,7 +17,7 @@ export class AddListingComponent implements OnInit {
     monthlyRent: 0,
     image: '',
     postcode: 0,
-    timestamp: ''
+    createdDate: new Date()
   };
 
   constructor(private listingService: ListingService) { }

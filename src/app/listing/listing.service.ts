@@ -14,7 +14,7 @@ export class ListingService {
     // Create new listing, then return as an object
     // this.listings = this.afs.collection('listings').valueChanges();
 
-    this.listingsCollection = this.afs.collection('listings');
+    this.listingsCollection = this.afs.collection('listings', ref => ref.orderBy('createdDate', 'desc'));
 
     // In addition to the listing data (eg. title), we get
     // the id by using snapshotChanges and mapping:

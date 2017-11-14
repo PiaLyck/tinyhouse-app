@@ -2,6 +2,7 @@
   <div *ngIf='listings?.length > 0; else noListings'>
     <ul *ngFor='let listing of listings'>
       <li>Id: {{ listing.id }}</li>
+      <li>CreatedDate: {{ listing.createdDate }}</li>
       <li>Title: {{ listing.title }}</li>
       <li>Description: {{ listing.description }}</li>
       <li>Postcode: {{ listing.postcode }}</li>

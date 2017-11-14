@@ -22,7 +22,6 @@ export class ListingListComponent implements OnInit {
   // Initializations go here, like fetching stuff
   ngOnInit() {
     this.listingService.getListings().subscribe(listings => {
-      console.log('Se alle listings: ' + listings);
       this.listings = listings;
     });
   }
