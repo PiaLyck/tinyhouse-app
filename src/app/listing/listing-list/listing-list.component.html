@@ -1,17 +1,37 @@
 <div class="listings">
-    <ul *ngFor='let listing of listings'>
-      <li>Id: {{ listing.id }}</li>
-      <li>CreatedDate: {{ listing.createdDate }}</li>
-      <li>Title: {{ listing.title }}</li>
-      <li>Description: {{ listing.description }}</li>
-      <li>Postcode: {{ listing.postcode }}</li>
-      <li>Monthly Rent: {{ listing.monthlyRent }}</li>
-      <li>
-        <img [src]="listing.image" alt="">
-      </li>
-      <div (click)="deleteListing($event, listing)">DELETE</div>
-      <div (click)="editListing($event, listing)">Edit</div>
-    </ul>
+  <ul *ngFor='let listing of listings'>
+    <li>Id: {{ listing.id }}</li>
+    <li>CreatedDate: {{ listing.createdDate }}</li>
+    <li>Title: {{ listing.title }}</li>
+    <li>Description: {{ listing.description }}</li>
+    <li>Postcode: {{ listing.postcode }}</li>
+    <li>Monthly Rent: {{ listing.monthlyRent }}</li>
+    <li>
+      <img [src]="listing.image" alt="">
+    </li>
+    <div (click)="editListing($event, listing)">Edit</div>
+    <div *ngIf='editState && listingToEdit.id == listing.id' (click)="clearState()">
+      X Click to close
+    </div>
+
+    <div *ngIf='editState && listingToEdit.id == listing.id'>
+      <form (ngSubmit)="updateListing(listing)" class="add-listing-form">
+        <mat-form-field>
+          <input matInput placeholder="Title" [(ngModel)]="listing.title" name="title">
+          <!--     <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <textarea matInput placeholder="Description" [(ngModel)]="listing.description" name="description"></textarea>
+        </mat-form-field>
+        <input type="submit" value="Update Listing" class="btn" />
+        <div (click)="deleteListing($event, listing)">DELETE</div>
+      </form>
+    </div>
+
+  </ul>
 </div>
 <!-- <div>
   <h1>{{ title }}</h1>

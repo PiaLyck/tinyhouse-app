@@ -41,6 +41,11 @@ export class ListingService {
     this.listingsDoc = this.afs.doc(`listings/${listing.id}`);
     this.listingsDoc.delete();
   }
+
+  updateListing(listing: Listing) {
+    this.listingsDoc = this.afs.doc(`listings/${listing.id}`);
+    this.listingsDoc.update(listing);
+  }
 }
 
 

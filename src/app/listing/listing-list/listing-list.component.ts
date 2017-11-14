@@ -28,13 +28,24 @@ export class ListingListComponent implements OnInit {
     });
   }
 
-  deleteListing(event, listing) {
+  deleteListing(event, listing: Listing) {
+    this.clearState(); // remove the state of the item to avoid console errors
     this.listingService.deleteListing(listing);
   }
 
-  editListing(event, listing){
+  editListing(event, listing: Listing) {
     this.editState = true;
     this.listingToEdit = listing;
+  }
+
+  updateListing(listing: Listing) {
+    this.listingService.updateListing(listing);
+    this.clearState(); // fold form up again after edit
+  }
+
+  clearState() {
+    this.editState = false;
+    this.listingToEdit = null;
   }
 
 }
