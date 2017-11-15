@@ -7,7 +7,7 @@ import { ListingDetailComponent } from './listing-detail/listing-detail.componen
 import { ListingListComponent } from './listing-list/listing-list.component';
 import { AuthGuard } from '../core/auth.guard';
 import { ListingService } from './listing.service';
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { MaterialComponentsModule } from '../shared/material-components.module';
 import { AddListingComponent } from './add-listing/add-listing.component';
 

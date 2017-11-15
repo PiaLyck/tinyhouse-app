@@ -4,9 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: 'app-auth'
 })
 
 export class AuthComponent implements OnInit {

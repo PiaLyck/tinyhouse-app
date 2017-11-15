@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './auth.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { NotifyService } from './notify.service';
 
 /* CoreModule should have only services and be imported only once in the AppModule.
 
@@ -20,6 +21,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule
   ],
   declarations: [],
-  providers: [AuthService]
+  providers: [AuthService, NotifyService]
 })
 export class CoreModule { }

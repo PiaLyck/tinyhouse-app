@@ -5,8 +5,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../user/user';
-
 import 'rxjs/add/operator/switchMap';
+import { NotifyService } from './notify.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router) {
+    private router: Router,
+    private notify: NotifyService) {
 
     // Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState
@@ -28,6 +29,26 @@ export class AuthService {
         }
       });
 
+  }
+
+  //// Email/Password Auth - START ////
+  emailSignUp(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        return this.setUserDoc(user); // create initial user document
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+
+
+  //// Email/Password Auth - END ////
+
+  //// Update properties on the user document eg. from a Tell Us About Yourself form ////
+  updateUser(user: User, data: any) {
+    return this.afs.doc(`users/${user.uid}`).update(data);
   }
 
   googleLogin() {
@@ -43,7 +64,7 @@ export class AuthService {
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user);
+        this.setUserDoc(credential.user);
       })
       .catch(function (error) {
         // Handle Errors here.
@@ -59,14 +80,14 @@ export class AuthService {
   }
 
   signOut() {
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(function () {
       console.log('Signed Out');
-    }, function(error) {
+    }, function (error) {
       console.error('Sign Out Error: ', error);
     });
   }
 
-  private updateUserData(user) {
+  private setUserDoc(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
@@ -75,11 +96,16 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
-      favouriteColor: 'green'
+      photoURL: user.photoURL
     };
 
     return userRef.set(data);
+  }
+
+
+  private handleError(error) {
+    console.log(error);
+    this.notify.update(error.message, 'error');
   }
 
 }

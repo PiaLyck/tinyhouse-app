@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialComponentsModule } from './material-components.module';
 
 /* SharedModule should have anything but services,
@@ -27,17 +29,21 @@ both those loaded when the app starts and those you lazy load later.
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     HttpModule,
     RouterModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    ReactiveFormsModule
   ],
   declarations: [],
   exports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     HttpModule,
     RouterModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

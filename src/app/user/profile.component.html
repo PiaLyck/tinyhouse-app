@@ -1,3 +1,43 @@
+<ng-container *ngIf="(auth.user | async) || {} as user">
+
+    <button (click)="auth.googleLogin()">Login with Google</button>
+    <button (click)="auth.facebookLogin()">Login with Facebook</button>
+
+  <form [formGroup]="signupForm" *ngIf="!user.uid" (ngSubmit)="signup()">
+
+    <label for="email">Email</label>
+    <input type="email" formControlName="email">
+
+    <div *ngIf="email.invalid && email.dirty">
+      Your email does not look okay...
+    </div>
+
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" required>
+    <div *ngIf="password.invalid && password.touched">
+      Password must be between 6 and 60 characters and contain at least one number
+    </div>
+
+    <div *ngIf="signupForm.valid">Form looks good! Let's do this.</div>
+    <button type="submit" [disabled]="!signupForm.valid">Submit</button>
+
+  </form>
+
+  <form [formGroup]="detailForm" *ngIf="user.uid && !user.favouriteColor" (ngSubmit)="setFavColor(user)">
+    <label for="favouriteColor">Favourite Color</label>
+    <input type="text" formControlName="favouriteColor">
+
+    <button type="submit" [disabled]="!detailForm.valid">Submit</button>
+
+  </form>
+
+  <p *ngIf="user.favouriteColor">
+    You have added your favourite color, COOL MAND
+  </p>
+
+</ng-container>
+
+<!--
 <div *ngIf="auth.user | async as user">
   <h3>Hej, {{ user.displayName }}</h3>
   <img [src]="user.photoURL" />
@@ -6,4 +46,4 @@
   <div (click)="editProfile()">Edit info</div>
   <div (click)="signOut">Sign out</div>
 </div>
-
+ -->

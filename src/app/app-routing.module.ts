@@ -14,7 +14,7 @@ import { AddListingComponent } from './listing/add-listing/add-listing.component
 const appRoutes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent },
   { path: 'listing', component: ListingListComponent, canActivate: [AuthGuard] },
   { path: 'listing/:id', component: ListingDetailComponent, canActivate: [AuthGuard] },
   { path: 'add-listing', component: AddListingComponent, canActivate: [AuthGuard] },
