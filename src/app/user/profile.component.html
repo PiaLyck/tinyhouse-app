@@ -1,27 +1,29 @@
 <ng-container *ngIf="(auth.user | async) || {} as user">
 
+  <div *ngIf="!user.uid">
     <button (click)="auth.googleLogin()">Login with Google</button>
     <button (click)="auth.facebookLogin()">Login with Facebook</button>
 
-  <form [formGroup]="signupForm" *ngIf="!user.uid" (ngSubmit)="signup()">
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
 
-    <label for="email">Email</label>
-    <input type="email" formControlName="email">
+      <label for="email">Email</label>
+      <input type="email" formControlName="email">
 
-    <div *ngIf="email.invalid && email.dirty">
-      Your email does not look okay...
-    </div>
+      <div *ngIf="email.invalid && email.dirty">
+        Your email does not look okay...
+      </div>
 
-    <label for="password">Password</label>
-    <input type="password" formControlName="password" required>
-    <div *ngIf="password.invalid && password.touched">
-      Password must be between 6 and 60 characters and contain at least one number
-    </div>
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" required>
+      <div *ngIf="password.invalid && password.touched">
+        Password must be between 6 and 60 characters and contain at least one number
+      </div>
 
-    <div *ngIf="signupForm.valid">Form looks good! Let's do this.</div>
-    <button type="submit" [disabled]="!signupForm.valid">Submit</button>
+      <div *ngIf="signupForm.valid">Form looks good! Let's do this.</div>
+      <button type="submit" [disabled]="!signupForm.valid">Submit</button>
 
-  </form>
+    </form>
+  </div>
 
   <form [formGroup]="detailForm" *ngIf="user.uid && !user.favouriteColor" (ngSubmit)="setFavColor(user)">
     <label for="favouriteColor">Favourite Color</label>
@@ -32,7 +34,7 @@
   </form>
 
   <p *ngIf="user.favouriteColor">
-    You have added your favourite color, COOL MAND
+    You have added your favourite color, COOL MAN, your profile is done.
   </p>
 
 </ng-container>

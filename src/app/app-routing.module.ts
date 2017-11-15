@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PageNotFoundComponent } from './not-found.component';
-import { AuthComponent } from './core/auth.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './core/auth.guard';
@@ -12,7 +11,7 @@ import { ProfileComponent } from './user/profile.component';
 import { AddListingComponent } from './listing/add-listing/add-listing.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: AuthComponent },
+  { path: 'login', component: ProfileComponent },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'listing', component: ListingListComponent, canActivate: [AuthGuard] },

@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialComponentsModule } from './material-components.module';
+import { NotificationMessageComponent } from './notification-message/notification-message.component';
+
 
 /* SharedModule should have anything but services,
 and be imported in all modules that need the shared stuff (which could also be the AppModule)
@@ -35,7 +37,7 @@ both those loaded when the app starts and those you lazy load later.
     MaterialComponentsModule,
     ReactiveFormsModule
   ],
-  declarations: [],
+  declarations: [NotificationMessageComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -43,7 +45,8 @@ both those loaded when the app starts and those you lazy load later.
     HttpModule,
     RouterModule,
     MaterialComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NotificationMessageComponent
   ]
 })
 export class SharedModule { }
