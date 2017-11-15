@@ -1,10 +1,9 @@
-<div>
-  profile works
-</div>
 <div *ngIf="auth.user | async as user">
   <h3>Hej, {{ user.displayName }}</h3>
   <img [src]="user.photoURL" />
   <p>UID: {{ user.uid }}</p>
   <p>FavouriteColor: {{ user.favouriteColor}}</p>
+  <div (click)="editProfile()">Edit info</div>
+  <div (click)="signOut">Sign out</div>
 </div>
-<button (click)="editProfile()">Edit info</button>
+

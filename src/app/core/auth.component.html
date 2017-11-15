@@ -7,6 +7,7 @@
   <h3>Hej gæst</h3>
   <p>Login, tak</p>
   <button (click)="auth.googleLogin()">Login with Google</button>
+  <button (click)="auth.facebookLogin()">Login with Facebook</button>
 
 </ng-template>
 
@@ -17,6 +18,7 @@
     <img [src]="user.photoURL" />
     <p>UID: {{ user.uid }}</p>
     <p>FavouriteColor: {{ user.favouriteColor}}</p>
+    <button (click)="auth.signOut()">Logout</button>
   </div>
 </ng-template>
 

@@ -8,8 +8,6 @@ import { User } from '../user/user';
 
 import 'rxjs/add/operator/switchMap';
 
-
-
 @Injectable()
 export class AuthService {
 
@@ -37,12 +35,37 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
+  facebookLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
+      })
+      .catch(function (error) {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential;
+        // Print out
+        console.log(errorCode + ' ' + errorMessage + ' ' + error.email + ' ' + error.credential);
       });
   }
+
+  signOut() {
+    firebase.auth().signOut().then(function() {
+      console.log('Signed Out');
+    }, function(error) {
+      console.error('Sign Out Error: ', error);
+    });
+  }
+
   private updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
