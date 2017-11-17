@@ -75,7 +75,7 @@ export class AuthService {
         const email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
-        // Print out
+        // Print out to user
         this.notify.update('An error occured: ' + `${errorCode} + ${errorMessage}`, 'info');
         console.log( + ' ' +  + ' ' + email + ' ' + credential);
       });
