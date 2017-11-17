@@ -65,6 +65,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.setUserDoc(credential.user);
+        this.notify.update('You have succesfully logged in', 'info');
       })
       .catch(function (error) {
         // Handle Errors here.
@@ -75,15 +76,16 @@ export class AuthService {
         // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
         // Print out
-        console.log(errorCode + ' ' + errorMessage + ' ' + error.email + ' ' + error.credential);
+        this.notify.update('An error occured: ' + `${errorCode} + ${errorMessage}`, 'info');
+        console.log( + ' ' +  + ' ' + email + ' ' + credential);
       });
   }
 
   signOut() {
     firebase.auth().signOut().then(function () {
-      console.log('Signed Out');
+      this.notify.update('You have succesfully logged out', 'info');
     }, function (error) {
-      console.error('Sign Out Error: ', error);
+      this.notify.update('Something went wrong during sign out:' + error, 'error');
     });
   }
 

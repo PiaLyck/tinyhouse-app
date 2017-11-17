@@ -27,9 +27,9 @@ import { AddListingComponent } from './listing/add-listing/add-listing.component
 @NgModule({
   imports: [
     BrowserModule,
+    CoreModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
-    CoreModule,
     AppRoutingModule,
     ListingModule,
     BrowserAnimationsModule,

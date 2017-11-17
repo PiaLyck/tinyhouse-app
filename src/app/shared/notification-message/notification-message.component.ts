@@ -9,7 +9,9 @@ import { NotifyService } from '../../core/notify.service';
 })
 export class NotificationMessageComponent implements OnInit {
 
-  constructor(public notify: NotifyService) { }
+  constructor(public notify: NotifyService) {
+    this.notify.update('Testingtesting', 'error');
+  }
 
   ngOnInit() { }
 

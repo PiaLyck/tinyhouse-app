@@ -3,7 +3,6 @@ import { AuthService } from '../core/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -54,5 +53,9 @@ export class ProfileComponent implements OnInit {
     return this.auth.updateUser(user, { favouriteColor: this.favouriteColor.value });
   }
 
+  // Sign out
+  signOut() {
+    this.auth.signOut();
+  }
 
 }

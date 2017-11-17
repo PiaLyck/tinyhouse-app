@@ -33,9 +33,16 @@
 
   </form>
 
-  <p *ngIf="user.favouriteColor">
+  <div *ngIf="user.favouriteColor">
     You have added your favourite color, COOL MAN, your profile is done.
-  </p>
+    <h3>Hej, {{ user.displayName }}</h3>
+    <img [src]="user.photoURL" />
+    <p>UID: {{ user.uid }}</p>
+    <p>FavouriteColor: {{ user.favouriteColor}}</p>
+    <div (click)="editProfile()">Edit info</div>
+    <div (click)="signOut()">Sign out</div>
+
+  </div>
 
 </ng-container>
 

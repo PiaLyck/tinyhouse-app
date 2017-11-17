@@ -8,8 +8,7 @@ import { NotifyService } from '../core/notify.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(public notify: NotifyService) {
-    this.notify.update('Testingtesting', 'error');
+  constructor() {
   }
 
   ngOnInit() {
