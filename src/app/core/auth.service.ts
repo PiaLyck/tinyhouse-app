@@ -76,7 +76,7 @@ export class AuthService {
         // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
         // Print out to user
-        this.notify.update('An error occured: ' + `${errorCode} + ${errorMessage}`, 'info');
+        this.notify.update(`An error occured: ${errorCode} and ${errorMessage}`, 'info');
         console.log( + ' ' +  + ' ' + email + ' ' + credential);
       });
   }
@@ -85,7 +85,7 @@ export class AuthService {
     firebase.auth().signOut().then(function () {
       this.notify.update('You have succesfully logged out', 'info');
     }, function (error) {
-      this.notify.update('Something went wrong during sign out:' + error, 'error');
+      this.notify.update('Something went wrong during sign out:' + error.message, 'error');
     });
   }
 
