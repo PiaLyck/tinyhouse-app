@@ -1,6 +1,6 @@
 # My first Angular + Firebase adventure: A matchmaking site for tiny house dwellers and landowners looking to rent out an area.
 
-## Live site at [Tinyland.dk](https://www.tinyland.dk)
+## Live site at [Tinyland.dk](http://www.tinyland.dk)
 
 ## Angular version
 Started at Angular4 and then updated to Angular5.
