@@ -8,8 +8,10 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UploadService {
+
   uploadCollection: AngularFirestoreCollection<Upload>;
   uploadDoc: AngularFirestoreDocument<Upload>;
+
   private basePath = '/uploads';
   uploads: Observable<Upload[]>;
 
@@ -32,8 +34,9 @@ export class UploadService {
   pushUpload(upload: Upload) {
     const storageRef = firebase.storage().ref();
     let uploadTask: any;
-console.log('Før uplaodstask');
+
     uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
         // upload in progress
