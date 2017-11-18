@@ -34,6 +34,16 @@ export class ProfileComponent implements OnInit {
     this.detailForm = this.fb.group({
       'favouriteColor': ['', [
         Validators.required
+      ]],
+      firstName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(40)
+      ]],
+      lastName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(40)
       ]]
     });
   }
@@ -41,6 +51,8 @@ export class ProfileComponent implements OnInit {
   // Using getters cuts down on the HTML in the template, so, apparently worth it.
   get email() { return this.signupForm.get('email'); }
   get password() { return this.signupForm.get('password'); }
+  get firstName() { return this.detailForm.get('firstName'); }
+  get lastName() { return this.detailForm.get('lastName'); }
   get favouriteColor() { return this.detailForm.get('favouriteColor'); }
 
   // Step 1
@@ -48,9 +60,10 @@ export class ProfileComponent implements OnInit {
     return this.auth.emailSignUp(this.email.value, this.password.value);
   }
 
-  // Set FavouriteColor
-  setFavColor(user) {
-    return this.auth.updateUser(user, { favouriteColor: this.favouriteColor.value });
+  // Step 2 - Set displayName and FavouriteColor
+  setDetails(user) {
+    const displayName = this.firstName.value + ' ' + this.lastName.value;
+    return this.auth.updateUser(user, { displayName: displayName, favouriteColor: this.favouriteColor.value });
   }
 
   // Sign out

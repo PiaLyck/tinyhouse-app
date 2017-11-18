@@ -48,7 +48,28 @@ export class AuthService {
 
   //// Update properties on the user document eg. from a Tell Us About Yourself form ////
   updateUser(user: User, data: any) {
-    return this.afs.doc(`users/${user.uid}`).update(data);
+    return this.afs.doc(`users/${user.uid}`).update(data)
+      .then(function() {
+        this.notify.update('Your user was updated', 'success');
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
+  }
+
+  private setUserDoc(user) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+
+    // Set custom data here
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    };
+
+    return userRef.set(data);
   }
 
   googleLogin() {
@@ -67,8 +88,11 @@ export class AuthService {
         this.setUserDoc(credential.user);
         this.notify.update('You have succesfully logged in', 'info');
       })
-      .catch(function (error) {
-        // Handle Errors here.
+      .catch(error => {
+        this.handleError(error);
+      });
+ /*     .catch(function (error) {
+         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
@@ -76,33 +100,19 @@ export class AuthService {
         // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
         // Print out to user
+        console.log(errorCode + ': ' + errorMessage + ': ' + email + ' ' + credential);
         this.notify.update(`An error occured: ${errorCode} and ${errorMessage}`, 'info');
-        /* console.log( + ' ' +  + ' ' + email + ' ' + credential); */
-      });
+      });*/
   }
 
   signOut() {
     firebase.auth().signOut().then(function () {
       this.notify.update('You have succesfully logged out', 'info');
     }, function (error) {
-      this.notify.update('Something went wrong during sign out:' + error.message, 'error');
+      this.handleError(error);
     });
   }
 
-  private setUserDoc(user) {
-    // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
-    // Set custom data here
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    };
-
-    return userRef.set(data);
-  }
 
 
   private handleError(error) {
