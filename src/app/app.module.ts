@@ -28,6 +28,10 @@ import { AddListingComponent } from './listing/add-listing/add-listing.component
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 
+// New things auto-put-here
+import { UploadListComponent } from './uploads/upload-list/upload-list.component';
+import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,6 +49,8 @@ import { UserModule } from './user/user.module';
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
+    UploadListComponent,
+    UploadFormComponent,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
