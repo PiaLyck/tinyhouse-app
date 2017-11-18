@@ -21,8 +21,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListingModule } from './listing/listing.module';
 import { AuthModule } from './core/auth.module';
 import { AuthGuard } from './core/auth.guard';
-import { ProfileComponent } from './user/profile.component';
+// import { ProfileComponent } from './user/profile.component';
 import { AddListingComponent } from './listing/add-listing/add-listing.component';
+
+// Fixing build issues
+import { DashboardModule } from './dashboard/dashboard.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   imports: [
@@ -33,14 +37,14 @@ import { AddListingComponent } from './listing/add-listing/add-listing.component
     AppRoutingModule,
     ListingModule,
     BrowserAnimationsModule,
-    AuthModule
+    AuthModule,
+    DashboardModule,
+    UserModule
   ],
   declarations: [
     AppComponent,
     WelcomeComponent,
     PageNotFoundComponent,
-    DashboardComponent,
-    ProfileComponent
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

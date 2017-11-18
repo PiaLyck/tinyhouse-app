@@ -106,13 +106,14 @@ export class AuthService {
   }
 
   signOut() {
-    firebase.auth().signOut().then(function () {
-      this.notify.update('You have succesfully logged out', 'info');
-    }, function (error) {
+    firebase.auth().signOut()
+    .then(function () {
+      this.notify.update('You have succesfully logged out', 'success');
+    })
+    .catch(error => {
       this.handleError(error);
     });
   }
-
 
 
   private handleError(error) {

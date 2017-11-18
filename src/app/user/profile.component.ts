@@ -35,12 +35,12 @@ export class ProfileComponent implements OnInit {
       'favouriteColor': ['', [
         Validators.required
       ]],
-      firstName: ['', [
+      'firstName': ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(40)
       ]],
-      lastName: ['', [
+      'lastName': ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(40)
