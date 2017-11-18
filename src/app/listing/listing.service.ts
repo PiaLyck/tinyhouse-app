@@ -29,7 +29,7 @@ export class ListingService {
   }
 
   getListings() {
-    // Being called from component
+    // Gets called from the component on ngOnInit
     return this.listings;
   }
 

@@ -1,4 +1,5 @@
 export class Upload {
+  id: string;
   $key: string;
   file: File;
   name: string;

@@ -29,8 +29,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 
 // New things auto-put-here
-import { UploadListComponent } from './uploads/upload-list/upload-list.component';
-import { UploadFormComponent } from './uploads/upload-form/upload-form.component';
+import { UploadModule } from './uploads/shared/upload.module';
 
 @NgModule({
   imports: [
@@ -43,14 +42,13 @@ import { UploadFormComponent } from './uploads/upload-form/upload-form.component
     BrowserAnimationsModule,
     AuthModule,
     DashboardModule,
-    UserModule
+    UserModule,
+    UploadModule
   ],
   declarations: [
     AppComponent,
     WelcomeComponent,
-    PageNotFoundComponent,
-    UploadListComponent,
-    UploadFormComponent,
+    PageNotFoundComponent
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
