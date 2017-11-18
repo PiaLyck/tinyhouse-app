@@ -77,7 +77,7 @@ export class AuthService {
         const credential = error.credential;
         // Print out to user
         this.notify.update(`An error occured: ${errorCode} and ${errorMessage}`, 'info');
-        console.log( + ' ' +  + ' ' + email + ' ' + credential);
+        /* console.log( + ' ' +  + ' ' + email + ' ' + credential); */
       });
   }
 

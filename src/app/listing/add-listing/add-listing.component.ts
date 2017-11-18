@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ListingService } from '../listing.service';
 import { Listing } from '../listing';
+import { NotifyService } from '../../core/notify.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AddListingComponent implements OnInit {
     createdDate: new Date()
   };
 
-  constructor(private listingService: ListingService) { }
+  constructor(private listingService: ListingService, private notify: NotifyService) { }
 
   ngOnInit() {
   }
@@ -31,6 +32,10 @@ export class AddListingComponent implements OnInit {
       // and then clear the fields:
       this.listing.title = '';
       this.listing.description = '';
+      this.notify.update('Your listing was succesfully created', 'success');
+    }
+    else {
+      this.notify.update('Something went wrong', 'error');
     }
   }
 
