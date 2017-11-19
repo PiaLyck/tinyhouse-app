@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Upload } from './upload';
 import { Observable } from 'rxjs/Observable';
@@ -45,10 +45,11 @@ export class UploadService {
       },
       (error) => {
         // upload failed
-        console.log(error);
+        console.log('Øv, fejlede: ' + error);
       },
       () => {
         // upload success
+        console.log('upload success!');
         upload.url = uploadTask.snapshot.downloadURL;
         upload.name = upload.file.name;
         this.saveFileData(upload);
@@ -57,8 +58,9 @@ export class UploadService {
   }
 
   // Writes the file details to the realtime db
-  private saveFileData(upload: Upload) {
+  private saveFileData(upload) {
     this.uploadCollection.add(upload);
+    return undefined;
   }
 
   /*   deleteUpload(upload: Upload) {
