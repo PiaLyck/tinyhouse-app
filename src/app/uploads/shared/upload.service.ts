@@ -79,7 +79,7 @@ export class UploadService {
     return undefined;
   }
 
-  // Workaround while Firestore fixes the custom Object issue...
+  // Trying a workaround while Firestore fixes the custom Object issue...
   convertObject(data: any) {
     let obj = {};
     Object.keys(data).forEach(function (key, index) {
