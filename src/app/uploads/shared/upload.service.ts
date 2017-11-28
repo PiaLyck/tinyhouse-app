@@ -3,19 +3,22 @@ import * as firebase from 'firebase';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Upload } from './upload';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../../user/user';
+import { NotifyService } from '../../core/notify.service';
 
 // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
 
 @Injectable()
 export class UploadService {
-
   uploadCollection: AngularFirestoreCollection<Upload>;
   uploadDoc: AngularFirestoreDocument<Upload>;
 
   private basePath = '/uploads';
   uploads: Observable<Upload[]>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore,
+    private notify: NotifyService) {
+
     this.uploadCollection = this.afs.collection('uploads');
 
     this.uploads = this.uploadCollection.snapshotChanges().map(changes => {
@@ -32,10 +35,11 @@ export class UploadService {
   }
 
   pushUpload(upload: Upload) {
+    const user = firebase.auth().currentUser;
     const storageRef = firebase.storage().ref();
     let uploadTask: any;
 
-    uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+    uploadTask = storageRef.child(`${this.basePath}/${user.uid}/${upload.file.name}`).put(upload.file);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
@@ -46,6 +50,7 @@ export class UploadService {
       (error) => {
         // upload failed
         console.log('Øv, fejlede: ' + error);
+        this.notify.update('Your upload failed', 'error');
       },
       () => {
         // upload success
@@ -59,8 +64,29 @@ export class UploadService {
 
   // Writes the file details to the realtime db
   private saveFileData(upload) {
-    this.uploadCollection.add(upload);
+    // const convertedUploadObj = this.convertObject(upload);
+    // console.log(convertedUploadObj);
+    this.uploadCollection.add(upload)
+      .then(function () {
+        console.log('inde i then i saveFileData!');
+      })
+      .catch(function (error) {
+        console.log('Øv, fejlede i saveFileData: ' + error);
+        this.handleError(error);
+      });
+
+    console.log('upload success efter .add(upload)');
     return undefined;
+  }
+
+  // Workaround while Firestore fixes the custom Object issue...
+  convertObject(data: any) {
+    let obj = {};
+    Object.keys(data).forEach(function (key, index) {
+      console.log(key);
+      obj[key] = data[key];
+    });
+    return obj;
   }
 
   /*   deleteUpload(upload: Upload) {
