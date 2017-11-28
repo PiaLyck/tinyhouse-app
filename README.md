@@ -18,6 +18,8 @@ See [this StackBlitz](https://stackblitz.com/edit/angular-material-flex-layout-s
 ## Deployment and Hosting
 [Firebase Hosting](https://firebase.google.com/docs/hosting/) provides fast and secure static hosting, and it's easy to deploy using the Firebase CLI. I've used it for properly testing my appplication outside the development environment. I haven't decided yet if I want to use it for production hosting as well. Stay tuned!
 
+## Error Handling and Monitoring
+Angular ErrorHandler provides a hook for centralized exception handling. In addition, I decided to intercept error handling with [Sentry](https://sentry.io) for error monitoring. Sentry is open-source and helps identifying and debugging errors.
 
 ---
 ## Instructions from Angular: 
