@@ -29,8 +29,19 @@ import { AddListingComponent } from './listing/add-listing/add-listing.component
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 
+Raven
+  .config(environment.sentryConfig)
+  .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    Raven.captureException(err);
+  }
+}
+
 // New things auto-put-here
 import { UploadModule } from './uploads/shared/upload.module';
+
 
 @NgModule({
   imports: [
