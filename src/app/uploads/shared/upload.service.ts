@@ -62,7 +62,7 @@ export class UploadService {
     );
   }
 
-  // Writes the file details to the realtime db
+  // Writes the file details to the Firestore db
   private saveFileData(upload) {
     // const convertedUploadObj = this.convertObject(upload);
     // console.log(convertedUploadObj);
