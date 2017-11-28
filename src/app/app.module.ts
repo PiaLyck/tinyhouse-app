@@ -1,5 +1,6 @@
+import * as Raven from 'raven-js';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -50,7 +51,7 @@ import { UploadModule } from './uploads/shared/upload.module';
     WelcomeComponent,
     PageNotFoundComponent
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, { provide: ErrorHandler, useClass: RavenErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
