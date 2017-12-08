@@ -20,11 +20,7 @@ export class UploadFormComponent implements OnInit {
   detectFiles(event) {
     this.selectedFiles = event.target.files;
   }
-  /*   uploadSingle() {
-      const file = this.selectedFiles.item(0);
-      this.currentUpload = new Upload(file);
-      this.upSvc.pushUpload(this.currentUpload);
-    } */
+
   abortUpload() {
     console.log('abortUpload clicked');
   }

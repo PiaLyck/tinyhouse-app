@@ -17,7 +17,7 @@ export class UploadDetailComponent implements OnInit {
   }
 
   deleteUpload(upload) {
-    // this.upSvc.deleteUpload(this.upload);
+    this.upSvc.deleteUpload(this.upload);
     console.log('Delete clicked');
   }
 

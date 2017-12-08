@@ -22,7 +22,7 @@ export class UploadService {
     private notify: NotifyService) {
     this.uploadCollection = this.afs.collection(`${this.basePath}`);
 
-      // In addition to the upload data (eg. title), we get
+    // In addition to the upload data (eg. title), we get
     // the id by using snapshotChanges and mapping:
     this.uploads = this.uploadCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
@@ -34,6 +34,7 @@ export class UploadService {
   }
 
   getUploads() {
+    console.log(this.uploads);
     return this.uploads;
 
   }
@@ -82,20 +83,27 @@ export class UploadService {
 
 
       });
-
-
-    // Writes the file details to the Firestore db
-    /*   private saveFileData(upload: Upload) {
-        console.log(this.uploadCollection);
-        console.log(upload);
-        this.uploadCollection.add(upload)
-          .then(() => {
-            console.log('inde i then');
-          })
-          .catch(error => console.log(error));
-        return undefined;
-      } */
-
-
-
   }
+
+ // Writes the file details to the realtime db
+ private deleteFileData(key: string) {
+  console.log('Delete file data');
+  //return this.db.list(`${this.basePath}/`).remove(key);
+}
+
+// Firebase files must have unique names in their respective storage dir
+// So the name serves as a unique key
+private deleteFileStorage(name: string) {
+  const storageRef = firebase.storage().ref();
+  storageRef.child(`${this.basePath}/${name}`).delete();
+}
+
+  deleteUpload(upload: Upload) {
+    console.log('deleteUpload(upload: Upload)');
+/*     this.deleteFileData(upload.$key)
+      .then(() => {
+        this.deleteFileStorage(upload.name);
+      })
+      .catch((error) => console.log(error)); */
+  }
+}
