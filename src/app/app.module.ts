@@ -29,6 +29,8 @@ import { AddListingComponent } from './listing/add-listing/add-listing.component
 import { DashboardModule } from './dashboard/dashboard.module';
 import { UserModule } from './user/user.module';
 
+/* Comment in again once dev is done
+
 Raven
   .config(environment.sentryConfig)
   .install();
@@ -37,7 +39,7 @@ export class RavenErrorHandler implements ErrorHandler {
   handleError(err: any): void {
     Raven.captureException(err);
   }
-}
+} */
 
 // New things auto-put-here
 import { UploadModule } from './uploads/shared/upload.module';
@@ -62,7 +64,9 @@ import { UploadModule } from './uploads/shared/upload.module';
     WelcomeComponent,
     PageNotFoundComponent
   ],
-  providers: [AuthGuard, { provide: ErrorHandler, useClass: RavenErrorHandler }],
+  providers: [AuthGuard
+    // ,{ provide: ErrorHandler, useClass: RavenErrorHandler }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
