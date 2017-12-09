@@ -5,6 +5,7 @@ import { Upload } from './upload';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../user/user';
 import { NotifyService } from '../../core/notify.service';
+import { merge } from 'rxjs/operators/merge';
 
 // https://angularfirebase.com/lessons/angular-file-uploads-to-firebase-storage/
 
@@ -20,7 +21,8 @@ export class UploadService {
 
   constructor(private afs: AngularFirestore,
     private notify: NotifyService) {
-    this.uploadCollection = this.afs.collection(`${this.basePath}`);
+    const user = firebase.auth().currentUser;
+    this.uploadCollection = this.afs.collection(`${this.basePath}`).doc(`${user.uid}`).collection('images');
 
     // In addition to the upload data (eg. title), we get
     // the id by using snapshotChanges and mapping:
@@ -36,7 +38,6 @@ export class UploadService {
   getUploads() {
     console.log(this.uploads);
     return this.uploads;
-
   }
 
   pushUpload(upload: Upload) {
@@ -63,47 +64,50 @@ export class UploadService {
       // 3) Success observer
       (): any => {
         // upload success
-
-        // console.log('upload success! writing file to /uploads folder in FireStore database as well.');
-        // Workaround while Cloud Firestore fixes the custom Object issue...
         const uploadUrl: string = uploadTask.snapshot.downloadURL;
         const uploadFileName: string = upload.file.name;
-        this.uploadCollection.add({
-          uploadDate: new Date(),
-          uid: user.uid,
-          name: uploadFileName,
-          imgUrl: uploadUrl
-        })
-          .then(function (docRef) {
-            console.log('Document written with ID: ', docRef.id);
-          })
-          .catch(function (error) {
-            this.notify.update('Error adding image', 'error');
-          });
-
-
+        this.saveToFS(uploadUrl, uploadFileName, user);
       });
   }
 
- // Writes the file details to the realtime db
- private deleteFileData(key: string) {
-  console.log('Delete file data');
-  //return this.db.list(`${this.basePath}/`).remove(key);
-}
+  // Save uploads in Firestore
+  saveToFS(uploadUrl, uploadFileName, user): void {
+    this.uploadCollection.add({
+      uploadDate: new Date(),
+      uid: user.uid,
+      name: uploadFileName,
+      imgUrl: uploadUrl
+    })
+      .then(function () {
+        console.log('Successfully saved to Firestore as well as Firebase Storage');
+      })
+      .catch(function (error) {
+        this.notify.update('Error adding image', 'error');
+      });
+  }
 
-// Firebase files must have unique names in their respective storage dir
-// So the name serves as a unique key
-private deleteFileStorage(name: string) {
-  const storageRef = firebase.storage().ref();
-  storageRef.child(`${this.basePath}/${name}`).delete();
-}
+
+
+  // Writes the file details to the realtime db
+  private deleteFileData(key: string) {
+    console.log('Delete file data');
+    // return this.db.list(`${this.basePath}/`).remove(key);
+  }
+
+  // Firebase files must have unique names in their respective storage dir
+  // So the name serves as a unique key
+  private deleteFileStorage(name: string) {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${this.basePath}/${name}`).delete();
+  }
 
   deleteUpload(upload: Upload) {
     console.log('deleteUpload(upload: Upload)');
-/*     this.deleteFileData(upload.$key)
-      .then(() => {
-        this.deleteFileStorage(upload.name);
-      })
-      .catch((error) => console.log(error)); */
+    /*     this.deleteFileData(upload.$key)
+          .then(() => {
+            this.deleteFileStorage(upload.name);
+          })
+          .catch((error) => console.log(error)); */
   }
+
 }
