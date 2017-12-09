@@ -13,12 +13,16 @@ import { merge } from 'rxjs/operators/merge';
 export class UploadService {
   // Type 'any' because Firestore cannot receive a custom Object (Upload)
   uploadCollection: AngularFirestoreCollection<any>;
-
   uploadDoc: AngularFirestoreDocument<Upload>;
-
-  private basePath = '/uploads';
   uploads: Observable<Upload[]>;
+
+  // Get logged in user
   user = firebase.auth().currentUser;
+
+  // Paths for databases etc.
+  private basePath = '/uploads';
+  private storageRefChild = `${this.basePath}/${this.user.uid}`;
+
 
 
   constructor(private afs: AngularFirestore,
@@ -44,7 +48,7 @@ export class UploadService {
     const storageRef = firebase.storage().ref();
     let uploadTask;
 
-    uploadTask = storageRef.child(`${this.basePath}/${this.user.uid}/${upload.file.name}`).put(upload.file);
+    uploadTask = storageRef.child(`${this.storageRefChild}/${upload.file.name}`).put(upload.file);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       // Three observers
@@ -57,7 +61,19 @@ export class UploadService {
       // 2) Error observer
       (error) => {
         // upload failed
-        console.log('Øv, fejlede: ' + error);
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/unauthorized':
+            console.log('User does not have permission to access the object');
+            break;
+          case 'storage/canceled':
+            console.log('User canceled the upload');
+            break;
+          case 'storage/unknown':
+            console.log('Unknown error occurred, inspect error.serverResponse');
+            break;
+        }
         this.notify.update('Your upload failed', 'error');
       },
       // 3) Success observer
@@ -97,17 +113,21 @@ export class UploadService {
   // So the name serves as a unique key
   private deleteFileStorage(name: string) {
     const storageRef = firebase.storage().ref();
-    storageRef.child(`${this.basePath}/${this.user.uid}/${name}`).delete();
+    storageRef.child(`${this.storageRefChild}/${name}`).delete();
   }
 
   deleteUpload(upload: Upload) {
     // First, delete Firestore image details
     this.deleteFileData(upload.id)
-    .then( () => {
-      // Then, delete actual file in Firebase Storage
-      this.deleteFileStorage(upload.name);
-    })
-    .catch((error) => console.log(error));
+      .then(() => {
+        // Then, delete actual file in Firebase Storage
+        this.deleteFileStorage(upload.name);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  cancelUpload() {
+
   }
 
 }

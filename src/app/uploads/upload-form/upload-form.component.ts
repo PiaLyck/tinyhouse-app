@@ -21,8 +21,8 @@ export class UploadFormComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
-  abortUpload() {
-    console.log('abortUpload clicked');
+  cancelUpload() {
+    this.upSvc.cancelUpload();
   }
 
   uploadMulti() {
