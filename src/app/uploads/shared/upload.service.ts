@@ -18,11 +18,12 @@ export class UploadService {
 
   private basePath = '/uploads';
   uploads: Observable<Upload[]>;
+  user = firebase.auth().currentUser;
+
 
   constructor(private afs: AngularFirestore,
     private notify: NotifyService) {
-    const user = firebase.auth().currentUser;
-    this.uploadCollection = this.afs.collection(`${this.basePath}`).doc(`${user.uid}`).collection('images');
+    this.uploadCollection = this.afs.collection(`${this.basePath}`).doc(`${this.user.uid}`).collection('images');
 
     // In addition to the upload data (eg. title), we get
     // the id by using snapshotChanges and mapping:
@@ -36,16 +37,14 @@ export class UploadService {
   }
 
   getUploads() {
-    console.log(this.uploads);
     return this.uploads;
   }
 
   pushUpload(upload: Upload) {
-    const user = firebase.auth().currentUser;
     const storageRef = firebase.storage().ref();
     let uploadTask;
 
-    uploadTask = storageRef.child(`${this.basePath}/${user.uid}/${upload.file.name}`).put(upload.file);
+    uploadTask = storageRef.child(`${this.basePath}/${this.user.uid}/${upload.file.name}`).put(upload.file);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       // Three observers
@@ -66,11 +65,11 @@ export class UploadService {
         // upload success
         const uploadUrl: string = uploadTask.snapshot.downloadURL;
         const uploadFileName: string = upload.file.name;
-        this.saveToFS(uploadUrl, uploadFileName, user);
+        this.saveToFS(uploadUrl, uploadFileName, this.user);
       });
   }
 
-  // Save uploads in Firestore
+  // Save file details in Firestore
   saveToFS(uploadUrl, uploadFileName, user): void {
     this.uploadCollection.add({
       uploadDate: new Date(),
@@ -88,26 +87,27 @@ export class UploadService {
 
 
 
-  // Writes the file details to the realtime db
-  private deleteFileData(key: string) {
-    console.log('Delete file data');
-    // return this.db.list(`${this.basePath}/`).remove(key);
+  // Deletes file details in Firestore
+  private deleteFileData(id: string) {
+    return this.uploadCollection.doc(id).delete();
   }
 
-  // Firebase files must have unique names in their respective storage dir
+  // Delete files in Firebase Storage
+  // Firebase Storage files must have unique names in their respective storage dir
   // So the name serves as a unique key
   private deleteFileStorage(name: string) {
     const storageRef = firebase.storage().ref();
-    storageRef.child(`${this.basePath}/${name}`).delete();
+    storageRef.child(`${this.basePath}/${this.user.uid}/${name}`).delete();
   }
 
   deleteUpload(upload: Upload) {
-    console.log('deleteUpload(upload: Upload)');
-    /*     this.deleteFileData(upload.$key)
-          .then(() => {
-            this.deleteFileStorage(upload.name);
-          })
-          .catch((error) => console.log(error)); */
+    // First, delete Firestore image details
+    this.deleteFileData(upload.id)
+    .then( () => {
+      // Then, delete actual file in Firebase Storage
+      this.deleteFileStorage(upload.name);
+    })
+    .catch((error) => console.log(error));
   }
 
 }
