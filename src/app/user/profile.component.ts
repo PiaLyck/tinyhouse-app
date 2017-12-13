@@ -11,6 +11,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 export class ProfileComponent implements OnInit {
   signupForm: FormGroup;
   detailForm: FormGroup;
+  nameDetailForm: FormGroup;
 
   constructor(public auth: AuthService, public fb: FormBuilder) { }
 
@@ -31,10 +32,7 @@ export class ProfileComponent implements OnInit {
 
     });
 
-    this.detailForm = this.fb.group({
-      'favouriteColor': ['', [
-        Validators.required
-      ]],
+    this.nameDetailForm = this.fb.group({
       'firstName': ['', [
         Validators.required,
         Validators.minLength(2),
@@ -46,13 +44,19 @@ export class ProfileComponent implements OnInit {
         Validators.maxLength(40)
       ]]
     });
+    this.detailForm = this.fb.group({
+      'favouriteColor': ['', [
+        Validators.required
+      ]]
+    });
+
   }
 
   // Using getters cuts down on the HTML in the template, so, apparently worth it.
   get email() { return this.signupForm.get('email'); }
   get password() { return this.signupForm.get('password'); }
-  get firstName() { return this.detailForm.get('firstName'); }
-  get lastName() { return this.detailForm.get('lastName'); }
+  get firstName() { return this.nameDetailForm.get('firstName'); }
+  get lastName() { return this.nameDetailForm.get('lastName'); }
   get favouriteColor() { return this.detailForm.get('favouriteColor'); }
 
   // Step 1
@@ -60,11 +64,18 @@ export class ProfileComponent implements OnInit {
     return this.auth.emailSignUp(this.email.value, this.password.value);
   }
 
-  // Step 2 - Set displayName and FavouriteColor
-  setDetails(user) {
+  // Step 2 - Set displayName (first and last name)
+  setNameDetails(user) {
     const displayName = this.firstName.value + ' ' + this.lastName.value;
-    return this.auth.updateUser(user, { displayName: displayName, favouriteColor: this.favouriteColor.value });
+    return this.auth.updateUser(user, { displayName: displayName });
   }
+
+  // Step 3 - Set FavouriteColor or other details
+  setDetails(user) {
+    const favouriteColor = this.favouriteColor.value;
+    return this.auth.updateUser(user, { favouriteColor: favouriteColor });
+  }
+
 
   // Sign out
   signOut() {
