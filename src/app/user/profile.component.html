@@ -25,7 +25,7 @@
     </form>
   </div>
 
-  <form [formGroup]="detailForm" *ngIf="user.uid && !user.favouriteColor && !user.displayName" (ngSubmit)="setDetails(user)">
+  <form [formGroup]="detailForm" *ngIf="user.uid && !user.favouriteColor" (ngSubmit)="setDetails(user)">
     <label for="firstName">First name:</label>
     <input type="text" formControlName="firstName">
     <label for="lastName">Last name:</label>
@@ -36,8 +36,7 @@
     <button type="submit" [disabled]="!detailForm.valid">Submit</button>
 
   </form>
-
-  <div *ngIf="user.displayName">
+  <div *ngIf="user.uid && user.favouriteColor && user.displayName">
     You have added your display name AND favourite color. Your profile is now done.
     <h3>displayName: {{ user.displayName }}</h3>
     <img [src]="user.photoURL" />
@@ -45,7 +44,6 @@
     <p>FavouriteColor: {{ user.favouriteColor}}</p>
     <div (click)="editProfile()">Edit info</div>
     <div (click)="signOut()">Sign out</div>
-
   </div>
 
 </ng-container>
