@@ -5,7 +5,7 @@
     <button (click)="auth.googleLogin()">Login with Google</button>
     <button (click)="auth.facebookLogin()">Login with Facebook</button>
 
-    // Step 1 - Sign in with Email and Password combo
+    <!-- Step 1 - Sign in with Email and Password combo -->
     <form [formGroup]="signupForm" (ngSubmit)="signup()">
 
       <label for="email">Email</label>
@@ -27,7 +27,7 @@
     </form>
   </div>
 
-  // Step 2 - Set first and last name (unless Google login, in that case it is already set)
+  <!-- Step 2 - Set first and last name (unless Google login, in that case it is already set) -->
   <form [formGroup]="nameDetailForm" *ngIf="user.uid && !user.displayName" (ngSubmit)="setDetails(user)">
     <label for="firstName">First name:</label>
     <input type="text" formControlName="firstName">
@@ -36,14 +36,14 @@
     <button type="submit" [disabled]="!nameDetailForm.valid">Submit</button>
   </form>
 
-  // Step 3 - Set additional information about user
+  <!-- Step 3 - Set additional information about user -->
   <form [formGroup]="detailForm" *ngIf="user.uid && !user.favouriteColor" (ngSubmit)="setDetails(user)">
     <label for="favouriteColor">Favourite Color</label>
     <input type="text" formControlName="favouriteColor">
     <button type="submit" [disabled]="!detailForm.valid">Submit</button>
   </form>
 
-  // Finished - User has answered all neccessary questions
+  <!-- Finished - User has answered all neccessary questions -->
   <div *ngIf="user.uid && user.favouriteColor && user.displayName">
     You have added your display name AND favourite color. Your profile is now done.
     <h3>displayName: {{ user.displayName }}</h3>
