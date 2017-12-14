@@ -8,7 +8,8 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatInputModule
+  MatInputModule,
+  MatFormFieldModule
 } from '@angular/material';
 
 /* "be sure to import the Angular Material modules after Angular's BrowserModule,
@@ -21,7 +22,8 @@ as the import order matters for NgModules." */
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
   ],
   exports: [
     MatButtonModule,
@@ -29,7 +31,8 @@ as the import order matters for NgModules." */
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
   ]
 })
 export class MaterialComponentsModule { }

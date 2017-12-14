@@ -14,7 +14,6 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 export class AddListingComponent implements OnInit {
 
   listingForm: FormGroup;
-
   listing: Listing;
 
   constructor(public fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
@@ -71,4 +70,4 @@ export class AddListingComponent implements OnInit {
 
 }
 
-}
+
