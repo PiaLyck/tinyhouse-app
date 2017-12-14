@@ -35,31 +35,46 @@ export class AddListingComponent implements OnInit {
       ]
       ],
       'description': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'), // At least one number present
+        Validators.required,
         Validators.minLength(6),
         Validators.maxLength(600)
+      ]],
+      'postcode': ['', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(4)
       ]]
-
     });
 
   }
 
   // Using getters cuts down on the HTML in the template, so, apparently worth it.
-  get title() { return this.listingForm.get('title'); }
-  get description() { return this.listingForm.get('description'); }
+  /* get title() { return this.listingForm.get('title'); }
+  get description() { return this.listingForm.get('description'); } */
 
+  getFormInput() {
+    const title = this.listingForm.get('title');
+    const description = this.listingForm.get('description');
+    const postcode = this.listingForm.get('postcode');
+    return this.listing;
+  }
 
   onSubmit() {
-    if (this.listing.title !== '' && this.listing.description !== '') {
+    if (this.listingForm.valid) {
+      console.log('VALID MAND');
+      this.getFormInput();
       this.listingService.addListing(this.listing);
+
       // and then clear the fields:
-      this.listing.title = '';
-      this.listing.description = '';
+      this.listingForm.reset();
       this.notify.update('Your listing was succesfully created', 'success');
     }
     else {
       this.notify.update('Something went wrong', 'error');
     }
+
   }
+
+}
 
 }

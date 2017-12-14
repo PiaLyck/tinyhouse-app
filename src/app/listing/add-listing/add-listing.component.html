@@ -4,6 +4,10 @@
     <mat-hint>Errors appear instantly!</mat-hint>
   </mat-form-field>
   <mat-form-field class="">
+    <input matInput placeholder="Postcode" formControlName="postcode" name="postcode" >
+    <mat-hint>Errors appear instantly!</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="">
     <textarea matInput placeholder="Description" formControlName="description" name="description"></textarea>
   </mat-form-field>
   <input type="submit" value="Submit"[disabled]="!listingForm.valid" class="btn" />
