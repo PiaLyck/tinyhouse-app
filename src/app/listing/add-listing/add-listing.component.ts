@@ -15,13 +15,7 @@ export class AddListingComponent implements OnInit {
 
   listingForm: FormGroup;
 
-  listing: Listing = {
-    title: '',
-    description: '',
-    monthlyRent: 0,
-    image: '',
-    postcode: 0
-  };
+  listing: Listing;
 
   constructor(public fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
 
@@ -48,22 +42,22 @@ export class AddListingComponent implements OnInit {
 
   }
 
-  // Using getters cuts down on the HTML in the template, so, apparently worth it.
-  /* get title() { return this.listingForm.get('title'); }
-  get description() { return this.listingForm.get('description'); } */
-
   getFormInput() {
-    const title = this.listingForm.get('title');
-    const description = this.listingForm.get('description');
-    const postcode = this.listingForm.get('postcode');
+    const title = this.listingForm.get('title').value;
+    const description = this.listingForm.get('description').value;
+    const postcode = this.listingForm.get('postcode').value;
+    this.listing = {
+      title: title,
+      description: description,
+      postcode: postcode
+    };
     return this.listing;
   }
 
   onSubmit() {
     if (this.listingForm.valid) {
-      console.log('VALID MAND');
-      this.getFormInput();
-      this.listingService.addListing(this.listing);
+      // Get form input and add to listings in Firebase
+      this.listingService.addListing(this.getFormInput());
 
       // and then clear the fields:
       this.listingForm.reset();
