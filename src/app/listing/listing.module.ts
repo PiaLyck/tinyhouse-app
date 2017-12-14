@@ -7,14 +7,19 @@ import { ListingDetailComponent } from './listing-detail/listing-detail.componen
 import { ListingListComponent } from './listing-list/listing-list.component';
 import { AuthGuard } from '../core/auth.guard';
 import { ListingService } from './listing.service';
-
+import { SharedModule } from '../shared/shared.module';
 import { MaterialComponentsModule } from '../shared/material-components.module';
 import { AddListingComponent } from './add-listing/add-listing.component';
-
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
+    HttpModule,
+    SharedModule,
     ListingRoutingModule,
     MaterialComponentsModule,
     FormsModule
@@ -25,6 +30,6 @@ import { AddListingComponent } from './add-listing/add-listing.component';
     AddListingComponent
   ],
   exports: [],
-  providers: [ListingService]
+  providers: [ListingService, FormBuilder]
 })
 export class ListingModule { }

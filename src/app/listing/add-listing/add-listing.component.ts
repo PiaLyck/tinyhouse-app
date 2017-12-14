@@ -15,7 +15,6 @@ export class AddListingComponent implements OnInit {
 
   listingForm: FormGroup;
 
-
   listing: Listing = {
     title: '',
     description: '',
@@ -24,7 +23,7 @@ export class AddListingComponent implements OnInit {
     postcode: 0
   };
 
-  constructor(private fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
+  constructor(public fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
 
   ngOnInit() {
     // First step of sign up process
