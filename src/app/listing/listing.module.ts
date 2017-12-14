@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { ListingRoutingModule } from './listing-routing.module';
 import { ListingDetailComponent } from './listing-detail/listing-detail.component';
 import { ListingListComponent } from './listing-list/listing-list.component';

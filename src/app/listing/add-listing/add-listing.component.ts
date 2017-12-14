@@ -12,6 +12,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
   encapsulation: ViewEncapsulation.None
 })
 export class AddListingComponent implements OnInit {
+  // Need help? Check this: https://blog.thoughtram.io/angular/2016/06/22/model-driven-forms-in-angular-2.html#formgroup-and-formcontrol
 
   listingForm: FormGroup;
   listing: Listing;
@@ -19,7 +20,6 @@ export class AddListingComponent implements OnInit {
   constructor(public fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
 
   ngOnInit() {
-    // First step of sign up process
     this.listingForm = this.fb.group({
       'title': ['', [
         Validators.required,
@@ -51,6 +51,10 @@ export class AddListingComponent implements OnInit {
       postcode: postcode
     };
     return this.listing;
+  }
+
+  getErrorMessage() {
+    return 'Hej fra getErrorMessage()';
   }
 
   onSubmit() {
