@@ -8,7 +8,6 @@ import { ListingListComponent } from './listing-list/listing-list.component';
 import { AuthGuard } from '../core/auth.guard';
 import { ListingService } from './listing.service';
 import { SharedModule } from '../shared/shared.module';
-import { MaterialComponentsModule } from '../shared/material-components.module';
 import { AddListingComponent } from './add-listing/add-listing.component';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +20,6 @@ import { HttpModule } from '@angular/http';
     HttpModule,
     SharedModule,
     ListingRoutingModule,
-    MaterialComponentsModule,
     FormsModule
   ],
   declarations: [
