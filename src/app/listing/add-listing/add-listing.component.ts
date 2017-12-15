@@ -54,7 +54,9 @@ export class AddListingComponent implements OnInit {
           Validators.minLength(4),
           Validators.maxLength(80)
         ]]
-      }),
+      },
+    /*   { validator: myCustomValidatorForThisGroupGoesHere} */
+    ),
       pizzas: this.fb.array([])
     });
 
