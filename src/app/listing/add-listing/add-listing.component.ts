@@ -13,6 +13,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class AddListingComponent implements OnInit {
   // Need help? Check this: https://blog.thoughtram.io/angular/2016/06/22/model-driven-forms-in-angular-2.html#formgroup-and-formcontrol
+  // and this: https://blog.thoughtram.io/angular/2016/03/14/custom-validators-in-angular-2.html
 
   listingForm: FormGroup;
   listing: Listing;
@@ -54,7 +55,9 @@ export class AddListingComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return 'Hej fra getErrorMessage()';
+    return this.listingForm.title.hasError('required') ? 'You must enter a value' :
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   onSubmit() {
