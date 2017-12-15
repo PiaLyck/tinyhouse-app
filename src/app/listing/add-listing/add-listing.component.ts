@@ -22,22 +22,40 @@ export class AddListingComponent implements OnInit {
 
   ngOnInit() {
     this.listingForm = this.fb.group({
-      'title': ['', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(60)
-      ]
-      ],
-      'description': ['', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(600)
-      ]],
-      'postcode': ['', [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(4)
-      ]]
+      details: this.fb.group({
+        title: ['', [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(60)
+        ]],
+        description: ['', [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(600)
+        ]],
+      }),
+      address: this.fb.group({
+        street: ['', [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(100)]
+        ],
+        streetnumber: ['', [
+          Validators.required,
+          Validators.minLength(1),
+        ]],
+        postcode: ['', [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(4)
+        ]],
+        city: ['', [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(80)
+        ]]
+      }),
+      pizzas: this.fb.array([])
     });
 
   }
