@@ -55,33 +55,20 @@ export class AddListingComponent implements OnInit {
           Validators.maxLength(80)
         ]]
       },
-    /*   { validator: myCustomValidatorForThisGroupGoesHere} */
-    ),
-      pizzas: this.fb.array([])
+        /*   { validator: myCustomValidatorForThisGroupGoesHere} */
+      )
     });
-
-  }
-
-  getFormInput() {
-    const title = this.listingForm.get('title').value;
-    const description = this.listingForm.get('description').value;
-    const postcode = this.listingForm.get('postcode').value;
-    this.listing = {
-      title: title,
-      description: description,
-      postcode: postcode
-    };
-    return this.listing;
   }
 
   getErrorMessage(formControlName) {
     // Implement ErrorMessage func here
+    console.log('Hej fra GetErrorMessage');
   }
 
   onSubmit() {
     if (this.listingForm.valid) {
       // Get form input and add to listings in Firebase
-      this.listingService.addListing(this.getFormInput());
+      this.listingService.addListing(this.listingForm.value);
 
       // and then clear the fields:
       this.listingForm.reset();
