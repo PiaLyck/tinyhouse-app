@@ -54,10 +54,8 @@ export class AddListingComponent implements OnInit {
     return this.listing;
   }
 
-  getErrorMessage() {
-    return this.listingForm.title.hasError('required') ? 'You must enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :
-        '';
+  getErrorMessage(formControlName) {
+    // Implement ErrorMessage func here
   }
 
   onSubmit() {

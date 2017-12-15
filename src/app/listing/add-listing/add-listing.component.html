@@ -12,7 +12,7 @@
   <mat-form-field class="">
     <textarea matInput placeholder="Description" formControlName="description" name="description"></textarea>
     <mat-hint>Describe the place and all that comes with it</mat-hint>
-    <mat-error *ngIf="listingForm.controls.postcode.errors">{{getErrorMessage()}}</mat-error>
+    <mat-error *ngIf="listingForm.controls.description.errors">{{getErrorMessage()}}</mat-error>
   </mat-form-field>
   <input type="submit" value="Submit" [disabled]="!listingForm.valid" class="btn" />
   <div *ngIf="listingForm.valid">Form looks good! Let's do this.</div>
