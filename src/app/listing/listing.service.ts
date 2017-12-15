@@ -34,7 +34,12 @@ export class ListingService {
   }
 
   addListing(listing: Listing) {
-    this.listingsCollection.add(listing);
+    this.listingsCollection.add(listing).then(() => {
+      console.log('success');
+    })
+    .catch((error) => {
+      console.log('no success');
+    });
   }
 
   deleteListing(listing: Listing) {

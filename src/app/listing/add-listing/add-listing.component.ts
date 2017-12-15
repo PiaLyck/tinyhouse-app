@@ -39,7 +39,7 @@ export class AddListingComponent implements OnInit {
       address: this.fb.group({
         street: ['', [
           Validators.required,
-          Validators.minLength(4),
+          Validators.minLength(2),
           Validators.maxLength(100)]
         ],
         streetnumber: ['', [
@@ -53,7 +53,7 @@ export class AddListingComponent implements OnInit {
         ]],
         city: ['', [
           Validators.required,
-          Validators.minLength(4),
+          Validators.minLength(2),
           Validators.maxLength(80)
         ]]
       },
@@ -69,11 +69,13 @@ export class AddListingComponent implements OnInit {
 
   onSubmit() {
     if (this.listingForm.valid) {
+      console.log(this.listingForm.value);
       // Get form input and add to listings in Firebase
       this.listingService.addListing(this.listingForm.value);
 
-      // and then clear the fields:
-      this.listingForm.reset();
+      // and then clear the form:
+      this.listingForm.get('details').reset();
+      this.listingForm.get('address').reset();
       this.notify.update('Your listing was succesfully created', 'success');
     }
     else {
