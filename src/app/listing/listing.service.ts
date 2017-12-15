@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Listing } from './listing';
 import { Observable } from 'rxjs/Observable';
+import { NotifyService } from '../core/notify.service';
 
 // Following along this guy: https://www.youtube.com/watch?v=gUmItHaVL2w
 
@@ -11,7 +12,7 @@ export class ListingService {
   listings: Observable<Listing[]>;
   listingsDoc: AngularFirestoreDocument<Listing>;
 
-  constructor(public afs: AngularFirestore) {
+  constructor(public afs: AngularFirestore, public notify: NotifyService) {
     // Create new listing, then return as an object
     // this.listings = this.afs.collection('listings').valueChanges();
 
@@ -35,10 +36,10 @@ export class ListingService {
 
   addListing(listing: Listing) {
     this.listingsCollection.add(listing).then(() => {
-      console.log('success');
+      this.notify.update('Your listing was succesfully created', 'success');
     })
     .catch((error) => {
-      console.log('no success');
+      console.log('no success: ' + error);
     });
   }
 

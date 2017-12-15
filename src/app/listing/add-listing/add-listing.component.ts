@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ListingService } from '../listing.service';
 import { Listing } from '../listing';
 import { NotifyService } from '../../core/notify.service';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { ValidationService } from '../../core/validation.service';
 
 
@@ -21,6 +21,19 @@ export class AddListingComponent implements OnInit {
 
   constructor(public fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
 
+  // https://github.com/angular/angular/issues/15741
+  // https://github.com/angular/material2/issues/4190#issuecomment-311488176
+/*   resetForm(formGroup: FormGroup) {
+    console.log('holler fra resetForm');
+    let control: AbstractControl = null;
+    formGroup.reset();
+    formGroup.markAsUntouched();
+    Object.keys(formGroup.controls).forEach((name) => {
+      control = formGroup.controls[name];
+      control.setErrors(null);
+    });
+  }
+ */
   ngOnInit() {
     this.listingForm = this.fb.group({
       details: this.fb.group({
@@ -67,6 +80,7 @@ export class AddListingComponent implements OnInit {
     console.log('Hej fra GetErrorMessage');
   }
 
+
   onSubmit() {
     if (this.listingForm.valid) {
       console.log(this.listingForm.value);
@@ -74,9 +88,7 @@ export class AddListingComponent implements OnInit {
       this.listingService.addListing(this.listingForm.value);
 
       // and then clear the form:
-      this.listingForm.get('details').reset();
-      this.listingForm.get('address').reset();
-      this.notify.update('Your listing was succesfully created', 'success');
+      this.resetForm(this.listingForm);
     }
     else {
       this.notify.update('Something went wrong', 'error');
