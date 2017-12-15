@@ -3,6 +3,7 @@ import { ListingService } from '../listing.service';
 import { Listing } from '../listing';
 import { NotifyService } from '../../core/notify.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ValidationService } from '../../core/validation.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class AddListingComponent implements OnInit {
         description: ['', [
           Validators.required,
           Validators.minLength(6),
-          Validators.maxLength(600)
+          Validators.maxLength(600),
+          ValidationService.emailValidator
         ]],
       }),
       address: this.fb.group({

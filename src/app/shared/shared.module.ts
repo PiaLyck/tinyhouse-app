@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialComponentsModule } from './material-components.module';
 import { NotificationMessageComponent } from './notification-message/notification-message.component';
+import { ControlMessagesComponent } from './control-message/control-message.component';
 
 
 /* SharedModule should have anything but services,
@@ -37,7 +38,7 @@ both those loaded when the app starts and those you lazy load later.
     MaterialComponentsModule,
     ReactiveFormsModule
   ],
-  declarations: [NotificationMessageComponent],
+  declarations: [NotificationMessageComponent, ControlMessagesComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -46,7 +47,8 @@ both those loaded when the app starts and those you lazy load later.
     RouterModule,
     MaterialComponentsModule,
     ReactiveFormsModule,
-    NotificationMessageComponent
+    NotificationMessageComponent,
+   ControlMessagesComponent
   ]
 })
 export class SharedModule { }
