@@ -4,6 +4,7 @@ import { Listing } from '../listing';
 import { NotifyService } from '../../core/notify.service';
 import { Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { ValidationService } from '../../core/validation.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,21 +20,21 @@ export class AddListingComponent implements OnInit {
   listingForm: FormGroup;
   listing: Listing;
 
-  constructor(public fb: FormBuilder, private listingService: ListingService, private notify: NotifyService) { }
+  constructor(public fb: FormBuilder, private listingService: ListingService, private router: Router, private notify: NotifyService) { }
 
   // https://github.com/angular/angular/issues/15741
   // https://github.com/angular/material2/issues/4190#issuecomment-311488176
-/*   resetForm(formGroup: FormGroup) {
-    console.log('holler fra resetForm');
-    let control: AbstractControl = null;
-    formGroup.reset();
-    formGroup.markAsUntouched();
-    Object.keys(formGroup.controls).forEach((name) => {
-      control = formGroup.controls[name];
-      control.setErrors(null);
-    });
-  }
- */
+  /*   resetForm(formGroup: FormGroup) {
+      console.log('holler fra resetForm');
+      let control: AbstractControl = null;
+      formGroup.reset();
+      formGroup.markAsUntouched();
+      Object.keys(formGroup.controls).forEach((name) => {
+        control = formGroup.controls[name];
+        control.setErrors(null);
+      });
+    }
+   */
   ngOnInit() {
     this.listingForm = this.fb.group({
       details: this.fb.group({
@@ -88,7 +89,10 @@ export class AddListingComponent implements OnInit {
       this.listingService.addListing(this.listingForm.value);
 
       // and then clear the form:
-      this.resetForm(this.listingForm);
+
+      const id = 365;
+      // Navigate to ListingDetailComponent
+      this.router.navigate(['/listing/' + id]);
     }
     else {
       this.notify.update('Something went wrong', 'error');
