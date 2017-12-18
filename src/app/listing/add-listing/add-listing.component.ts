@@ -86,18 +86,16 @@ export class AddListingComponent implements OnInit {
     if (this.listingForm.valid) {
       console.log(this.listingForm.value);
       // Get form input and add to listings in Firebase
-      this.listingService.addListing(this.listingForm.value);
-
+      const id = this.listingService.addListing(this.listingForm.value);
+      console.log(id);
       // and then clear the form:
 
-      const id = 365;
       // Navigate to ListingDetailComponent
       this.router.navigate(['/listing/' + id]);
     }
     else {
       this.notify.update('Something went wrong', 'error');
     }
-
   }
 
 }

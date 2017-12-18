@@ -35,8 +35,10 @@ export class ListingService {
   }
 
   addListing(listing: Listing) {
-    this.listingsCollection.add(listing).then(() => {
+    this.listingsCollection.add(listing)
+    .then((docRef) => {
       this.notify.update('Your listing was succesfully created', 'success');
+      console.log(docRef.id);
     })
     .catch((error) => {
       console.log('no success: ' + error);
