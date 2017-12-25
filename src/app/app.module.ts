@@ -43,6 +43,7 @@ export class RavenErrorHandler implements ErrorHandler {
 
 // New things auto-put-here
 import { UploadModule } from './uploads/shared/upload.module';
+import { FaqModule } from './faq/faq.module';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { UploadModule } from './uploads/shared/upload.module';
     AuthModule,
     DashboardModule,
     UserModule,
-    UploadModule
+    UploadModule,
+    FaqModule
   ],
   declarations: [
     AppComponent,
