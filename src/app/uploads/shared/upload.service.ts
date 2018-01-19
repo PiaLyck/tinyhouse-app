@@ -48,7 +48,7 @@ export class UploadService {
     const storageRef = firebase.storage().ref();
     let uploadTask;
 
-    uploadTask = storageRef.child(`${this.storageRefChild}/${upload.file.name}`).put(upload.file);
+    uploadTask = storageRef.child(`${this.storageRefChild}/images/${upload.file.name}`).put(upload.file);
 
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       // Three observers
@@ -113,7 +113,13 @@ export class UploadService {
   // So the name serves as a unique key
   private deleteFileStorage(name: string) {
     const storageRef = firebase.storage().ref();
-    storageRef.child(`${this.storageRefChild}/${name}`).delete();
+    storageRef.child(`${this.storageRefChild}/images/${name}`).delete()
+    .then(() => {
+      this.notify.update('The image' + name + 'was succesfully deleted', 'success');
+    })
+    .catch(() => {
+      this.notify.update('Error deleting image', 'error');
+    });
   }
 
   deleteUpload(upload: Upload) {
@@ -121,6 +127,8 @@ export class UploadService {
     this.deleteFileData(upload.id)
       .then(() => {
         // Then, delete actual file in Firebase Storage
+        console.log('upload name: ' + upload.name);
+        console.log('upload id: ' + upload.id);
         this.deleteFileStorage(upload.name);
       })
       .catch((error) => console.log(error));
