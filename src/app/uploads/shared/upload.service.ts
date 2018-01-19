@@ -115,7 +115,7 @@ export class UploadService {
     const storageRef = firebase.storage().ref();
     storageRef.child(`${this.storageRefChild}/images/${name}`).delete()
     .then(() => {
-      this.notify.update('The image' + name + 'was succesfully deleted', 'success');
+      this.notify.update('The image ' + name + ' was succesfully deleted', 'success');
     })
     .catch(() => {
       this.notify.update('Error deleting image', 'error');
