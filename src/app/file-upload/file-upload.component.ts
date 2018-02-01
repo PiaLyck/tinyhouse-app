@@ -4,6 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
 import { NotifyService } from '../core/notify.service';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -26,13 +27,20 @@ export class FileUploadComponent implements OnInit {
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore, public notify: NotifyService) { }
+  constructor(
+    private storage: AngularFireStorage,
+    private db: AngularFirestore,
+    public notify: NotifyService,
+    private auth: AuthService) {
+  }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
   }
 
   startUpload(event: FileList) {
+    const userID = this.auth.getLoggedInUserID();
+
     // The File object
     const file = event.item(0);
 
@@ -43,7 +51,7 @@ export class FileUploadComponent implements OnInit {
     }
 
     // The storage path
-    const path = `uploadstest/${new Date().getTime()}_${file.name}`;
+    const path = `uploads/${userID}/images/${new Date().getTime()}_${file.name}`;
 
     // Totally optional metadata
     const customMetadata = { app: 'Tinyland.dks lovely app!' };
@@ -58,14 +66,14 @@ export class FileUploadComponent implements OnInit {
         console.log(snap);
         if (snap.bytesTransferred === snap.totalBytes) {
           // Update Firestore on completion
-          this.db.collection('photostest').add({ path, size: snap.totalBytes })
-          .then(() => {
-            this.notify.update('Your image was succesfully uploaded', 'success');
-          })
-          .catch(error => {
-            this.notify.update('Something went wrong when uploading. Try again later', 'error');
-            // TODO: handle error
-          });
+          this.db.collection('uploads').doc(`${userID}`).collection('images').add({ path, size: snap.totalBytes })
+            .then(() => {
+              this.notify.update('Your image was succesfully uploaded', 'success');
+            })
+            .catch(error => {
+              this.notify.update('Something went wrong when uploading. Try again later', 'error');
+              // TODO: handle error
+            });
         }
       })
     );

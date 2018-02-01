@@ -91,34 +91,38 @@ export class AuthService {
       .catch(error => {
         this.handleError(error);
       });
- /*     .catch(function (error) {
-         // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential;
-        // Print out to user
-        console.log(errorCode + ': ' + errorMessage + ': ' + email + ' ' + credential);
-        this.notify.update(`An error occured: ${errorCode} and ${errorMessage}`, 'info');
-      });*/
+    /*     .catch(function (error) {
+            // Handle Errors here.
+           const errorCode = error.code;
+           const errorMessage = error.message;
+           // The email of the user's account used.
+           const email = error.email;
+           // The firebase.auth.AuthCredential type that was used.
+           const credential = error.credential;
+           // Print out to user
+           console.log(errorCode + ': ' + errorMessage + ': ' + email + ' ' + credential);
+           this.notify.update(`An error occured: ${errorCode} and ${errorMessage}`, 'info');
+         });*/
   }
 
   signOut() {
     firebase.auth().signOut()
-    .then(notify => {
-      this.notify.update('You have succesfully logged out', 'success');
-    })
-    .catch(error => {
-      this.handleError(error);
-    });
+      .then(notify => {
+        this.notify.update('You have succesfully logged out', 'success');
+      })
+      .catch(error => {
+        this.handleError(error);
+      });
   }
 
 
   private handleError(error) {
     console.log(error);
     this.notify.update(error.message, 'error');
+  }
+
+  getLoggedInUserID() {
+    return firebase.auth().currentUser.uid;
   }
 
 }
