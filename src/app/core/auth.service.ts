@@ -49,7 +49,7 @@ export class AuthService {
   //// Update properties on the user document eg. from a Tell Us About Yourself form ////
   updateUser(user: User, data: any) {
     return this.afs.doc(`users/${user.uid}`).update(data)
-      .then(function() {
+      .then(() => {
         this.notify.update('Your user was updated', 'success');
       })
       .catch(error => {
@@ -107,7 +107,7 @@ export class AuthService {
 
   signOut() {
     firebase.auth().signOut()
-    .then(function () {
+    .then(notify => {
       this.notify.update('You have succesfully logged out', 'success');
     })
     .catch(error => {
