@@ -42,10 +42,12 @@ export class RavenErrorHandler implements ErrorHandler {
 } */
 
 // New things auto-put-here
-import { UploadModule } from './uploads/shared/upload.module';
 import { FaqModule } from './faq/faq.module';
 import { AboutModule } from './about/about.module';
-
+import { FileUploadModule } from './file-upload/file-upload.module';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   imports: [
@@ -54,12 +56,15 @@ import { AboutModule } from './about/about.module';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
     ListingModule,
     BrowserAnimationsModule,
     AuthModule,
+    FileUploadModule,
     DashboardModule,
     UserModule,
-    UploadModule,
     FaqModule,
     AboutModule
   ],
