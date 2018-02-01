@@ -48,6 +48,7 @@ import { FileUploadModule } from './file-upload/file-upload.module';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { NotifyService } from './core/notify.service';
 
 @NgModule({
   imports: [
@@ -73,8 +74,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     WelcomeComponent,
     PageNotFoundComponent
   ],
-  providers: [AuthGuard
-    // ,{ provide: ErrorHandler, useClass: RavenErrorHandler }
+  providers: [AuthGuard, NotifyService
+    // , { provide: ErrorHandler, useClass: HandleError }
   ],
   bootstrap: [AppComponent]
 })

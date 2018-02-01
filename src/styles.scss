@@ -1,14 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 /* CSS DIRECTORY
-	1. =GLOBAL
-	2. =COLORS
+  1. =VARIABLES
+	2. =GLOBAL
 	3. =FONTS
 	4. =BUTTONS
   5. =ETC...
 */
 
+/* ===============
+   1. VARIABLES
+   =============== */
+
+$bgcolor: whitesmoke;
+$maincolor: black;
 
 /* ===============
    1. GLOBAL
@@ -16,14 +21,13 @@
 
 body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background-color: $bgcolor;
+  color: $maincolor;
 }
 
-
-/* ===============
-   2. COLORS
-   =============== */
-
-$bgcolor: whitesmoke;
+a, a:visited, a:hover, a:active{
+  color: $maincolor;
+}
 
 /* ===============
    3. FONTS

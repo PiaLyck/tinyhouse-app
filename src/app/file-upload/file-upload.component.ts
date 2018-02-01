@@ -3,6 +3,7 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { tap } from 'rxjs/operators';
+import { NotifyService } from '../core/notify.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -25,13 +26,11 @@ export class FileUploadComponent implements OnInit {
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
-
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, public notify: NotifyService) { }
 
   toggleHover(event: boolean) {
     this.isHovering = event;
   }
-
 
   startUpload(event: FileList) {
     // The File object
@@ -58,12 +57,18 @@ export class FileUploadComponent implements OnInit {
       tap(snap => {
         console.log(snap);
         if (snap.bytesTransferred === snap.totalBytes) {
-          // Update firestore on completion
-          this.db.collection('photostest').add({ path, size: snap.totalBytes });
+          // Update Firestore on completion
+          this.db.collection('photostest').add({ path, size: snap.totalBytes })
+          .then(() => {
+            this.notify.update('Your image was succesfully uploaded', 'success');
+          })
+          .catch(error => {
+            this.notify.update('Something went wrong when uploading. Try again later', 'error');
+            // TODO: handle error
+          });
         }
       })
     );
-
 
     // The file's download URL
     this.downloadURL = this.task.downloadURL();
