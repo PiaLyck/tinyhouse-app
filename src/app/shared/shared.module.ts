@@ -8,8 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialComponentsModule } from './material-components.module';
 import { NotificationMessageComponent } from './notification-message/notification-message.component';
 import { ControlMessagesComponent } from './control-message/control-message.component';
-import { FileSizePipe } from './file-size.pipe';
-import { DropZoneDirective } from './drop-zone.directive';
+import { FileSizePipe } from './pipes/file-size.pipe';
+import { DropZoneDirective } from './directives/drop-zone.directive';
 
 /* SharedModule should have anything but services,
 and be imported in all modules that need the shared stuff (which could also be the AppModule)
