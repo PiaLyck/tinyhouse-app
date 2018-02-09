@@ -37,6 +37,7 @@ export class AddListingComponent implements OnInit {
    */
   ngOnInit() {
     this.listingForm = this.fb.group({
+      timestamp: new Date(),
       details: this.fb.group({
         title: ['', [
           Validators.required,

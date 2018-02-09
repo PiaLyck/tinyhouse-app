@@ -1,10 +1,10 @@
 <div class="listings">
   <ul *ngFor='let listing of listings'>
     <li>Id: {{ listing.address.city }}</li>
-    <li>CreatedDate: {{ listing.createdDate }}</li>
+    <li>CreatedDate: {{ listing.timestamp }}</li>
     <li>Title: {{ listing.details.title }}</li>
-    <li>Description: {{ listing.description }}</li>
-    <li>Postcode: {{ listing.postcode }}</li>
+    <li>Description: {{ listing.details.description }}</li>
+    <li>Postcode: {{ listing.address.postcode }}</li>
     <li>Monthly Rent: {{ listing.monthlyRent }}</li>
     <li>
       <img [src]="listing.image" alt="">
