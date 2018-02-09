@@ -1,8 +1,8 @@
 <div class="listings">
   <ul *ngFor='let listing of listings'>
-    <li>Id: {{ listing.id }}</li>
+    <li>Id: {{ listing.address.city }}</li>
     <li>CreatedDate: {{ listing.createdDate }}</li>
-    <li>Title: {{ listing.title }}</li>
+    <li>Title: {{ listing.details.title }}</li>
     <li>Description: {{ listing.description }}</li>
     <li>Postcode: {{ listing.postcode }}</li>
     <li>Monthly Rent: {{ listing.monthlyRent }}</li>

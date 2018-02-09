@@ -14,19 +14,21 @@ export class ListingService {
 
   constructor(public afs: AngularFirestore, public notify: NotifyService) {
     // Create new listing, then return as an object
-    // this.listings = this.afs.collection('listings').valueChanges();
+    this.listings = this.afs.collection('listings').valueChanges();
 
     this.listingsCollection = this.afs.collection('listings', ref => ref.orderBy('createdDate', 'desc'));
 
+    // TODO: Why did this stop working after updating AngularFire lib?
+    // Temp fix: Go back to using .valueChanges() in line 17 ^
     // In addition to the listing data (eg. title), we get
     // the id by using snapshotChanges and mapping:
-    this.listings = this.listingsCollection.snapshotChanges().map(changes => {
+/*     this.listings = this.listingsCollection.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Listing;
         data.id = a.payload.doc.id;
         return data;
       });
-    });
+    }); */
   }
 
   getListings() {

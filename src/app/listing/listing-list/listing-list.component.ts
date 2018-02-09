@@ -20,8 +20,10 @@ export class ListingListComponent implements OnInit {
 
   // Initializations go here, like fetching stuff
   ngOnInit() {
+    console.log('ON INIT!');
     this.listingService.getListings().subscribe(listings => {
       this.listings = listings;
+      console.log(listings);
     });
   }
 
